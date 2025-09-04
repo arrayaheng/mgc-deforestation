@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stop Deforestation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f9f0;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2d6a4f;
+      color: white;
+      padding: 15px;
+    }
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    button {
+      padding: 10px 20px;
+      background: #40916c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+    button:hover {
+      background: #2d6a4f;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 15px;
+      background: #d8f3dc;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌳 Stop Deforestation</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Why It Matters</h2>
+      <p>
+        Every second, forests the size of a football field are destroyed. Forests give us oxygen, regulate the climate, and shelter millions of species. Together, we can spread awareness and protect them.
+      </p>
+    </section>
+
+    <section>
+      <h2>🌱 Plant a Virtual Tree</h2>
+      <button onclick="plantTree()">Plant Tree</button>
+      <p id="treeCounter">Trees planted: 0</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Save Our Forests Project</p>
+  </footer>
+
+  <script>
+    let trees = 0;
+    function plantTree() {
+      trees++;
+      document.getElementById("treeCounter").textContent = "Trees planted: " + trees;
+    }
+  </script>
+</body>
+</html>
