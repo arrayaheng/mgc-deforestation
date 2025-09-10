@@ -2,80 +2,148 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Stop Deforestation</title>
+  <title>Deforestation Awareness</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f9f0;
-      text-align: center;
       margin: 0;
-      padding: 0;
+      background: #f4fff4;
+      line-height: 1.6;
     }
     header {
       background: #2d6a4f;
       color: white;
-      padding: 15px;
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
     }
     nav a {
       color: white;
-      margin: 0 12px;
+      margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
     }
+    section {
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
+    section h2 {
+      color: #2d6a4f;
+    }
     button {
+      margin-top: 10px;
       padding: 10px 20px;
       background: #40916c;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 16px;
-      margin-top: 15px;
     }
     button:hover {
-      background: #2d6a4f;
+      background: #1b4332;
+    }
+    .hidden {
+      display: none;
+      margin-top: 10px;
+      color: #333;
     }
     footer {
-      margin-top: 40px;
-      padding: 15px;
       background: #d8f3dc;
+      text-align: center;
+      padding: 15px;
       font-size: 14px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>🌳 Stop Deforestation</h1>
+    <h1>🌳 Deforestation Awareness</h1>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Quiz</a>
+      <a href="#home">Home</a>
+      <a href="#causes">Causes</a>
+      <a href="#problems">Problems</a>
+      <a href="#solutions">Solutions</a>
     </nav>
   </header>
 
-  <main>
-    <section>
-      <h2>Why It Matters</h2>
-      <p>
-        Every second, forests the size of a football field are destroyed. Forests give us oxygen, regulate the climate, and shelter millions of species. Together, we can spread awareness and protect them.
-      </p>
-    </section>
+  <section id="home">
+    <h2>Welcome</h2>
+    <p>
+      Forests cover about 31% of the Earth’s land area, but we are losing them at an alarming rate.  
+      This website explains the <b>causes</b>, <b>problems</b>, and <b>solutions</b> to deforestation.
+    </p>
+    <p>
+      Estimated trees lost since you opened this page:
+      <span id="counter" style="font-weight: bold; font-size: 20px;">0</span>
+    </p>
+  </section>
 
-    <section>
-      <h2>🌱 Plant a Virtual Tree</h2>
-      <button onclick="plantTree()">Plant Tree</button>
-      <p id="treeCounter">Trees planted: 0</p>
-    </section>
-  </main>
+  <section id="causes">
+    <h2>Causes of Deforestation</h2>
+    <p>Click below to reveal the main drivers:</p>
+    <button onclick="toggle('cause1')">Agriculture</button>
+    <p id="cause1" class="hidden">🌾 Large areas are cleared to make way for crops like soy, palm oil, and cattle ranching.</p>
+
+    <button onclick="toggle('cause2')">Logging</button>
+    <p id="cause2" class="hidden">🪵 Trees are cut down for timber, paper, and fuel, often unsustainably.</p>
+
+    <button onclick="toggle('cause3')">Urbanization</button>
+    <p id="cause3" class="hidden">🏗️ Expanding cities and infrastructure destroy natural habitats.</p>
+
+    <button onclick="toggle('cause4')">Fires</button>
+    <p id="cause4" class="hidden">🔥 Some are natural, but many are man-made to clear land quickly.</p>
+  </section>
+
+  <section id="problems">
+    <h2>Problems Caused by Deforestation</h2>
+    <p>Click below to reveal the consequences:</p>
+    <button onclick="toggle('prob1')">Climate Change</button>
+    <p id="prob1" class="hidden">🌍 Trees absorb carbon dioxide; without them, greenhouse gases increase.</p>
+
+    <button onclick="toggle('prob2')">Biodiversity Loss</button>
+    <p id="prob2" class="hidden">🐒 Millions of species lose their homes and face extinction.</p>
+
+    <button onclick="toggle('prob3')">Water Cycle Disruption</button>
+    <p id="prob3" class="hidden">💧 Forests help regulate rainfall; without them, droughts and floods worsen.</p>
+
+    <button onclick="toggle('prob4')">Soil Erosion</button>
+    <p id="prob4" class="hidden">🌪️ Without tree roots, soil washes away, reducing fertility.</p>
+  </section>
+
+  <section id="solutions">
+    <h2>Solutions to Deforestation</h2>
+    <p>Click below to reveal what we can do:</p>
+    <button onclick="toggle('sol1')">Plant Trees</button>
+    <p id="sol1" class="hidden">🌱 Reforestation and afforestation projects restore lost forests.</p>
+
+    <button onclick="toggle('sol2')">Stronger Laws</button>
+    <p id="sol2" class="hidden">📜 Governments must enforce regulations to stop illegal logging.</p>
+
+    <button onclick="toggle('sol3')">Sustainable Products</button>
+    <p id="sol3" class="hidden">🛒 Buy certified wood, paper, and food that don’t harm forests.</p>
+
+    <button onclick="toggle('sol4')">Awareness & Action</button>
+    <p id="sol4" class="hidden">🧑‍🤝‍🧑 Educating others and supporting NGOs helps spread change.</p>
+  </section>
 
   <footer>
-    <p>© 2025 Save Our Forests Project</p>
+    <p>© 2025 Deforestation Awareness Project | Built with ❤️</p>
   </footer>
 
   <script>
+    // Tree loss counter (~27 trees per second globally)
     let trees = 0;
-    function plantTree() {
-      trees++;
-      document.getElementById("treeCounter").textContent = "Trees planted: " + trees;
+    setInterval(() => {
+      trees += 27;
+      document.getElementById("counter").textContent = trees.toLocaleString();
+    }, 1000);
+
+    // Toggle info sections
+    function toggle(id) {
+      let el = document.getElementById(id);
+      el.classList.toggle("hidden");
     }
   </script>
 </body>
