@@ -4,23 +4,26 @@
   <meta charset="UTF-8">
   <title>Deforestation Awareness</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f0f9f0; }
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f0f9f0; line-height:1.6; }
     header { background:#2d6a4f; color:white; padding:20px; text-align:center; }
-    nav a { color:white; margin:0 10px; text-decoration:none; font-weight:bold; }
-    section { padding:20px; max-width:800px; margin:auto; }
-    h2 { color:#2d6a4f; }
-    img { max-width:100%; border-radius:10px; margin:10px 0; }
-    button { background:#40916c; color:white; border:none; padding:10px 20px; margin:10px 0; cursor:pointer; border-radius:8px; }
+    nav a { color:white; margin:0 12px; text-decoration:none; font-weight:bold; }
+    section { padding:40px 20px; max-width:900px; margin:auto; }
+    h2 { color:#2d6a4f; margin-top:0; }
+    img { max-width:100%; border-radius:10px; margin:20px 0; display:block; }
+    ul { text-align:left; margin:20px auto; max-width:600px; }
+    button { background:#40916c; color:white; border:none; padding:10px 20px; margin:10px 5px; cursor:pointer; border-radius:8px; font-size:16px; }
     button:hover { background:#2d6a4f; }
-    footer { background:#d8f3dc; padding:15px; text-align:center; margin-top:30px; }
-    .question { margin-bottom:20px; }
-    canvas { background:white; border:1px solid #ccc; margin-top:20px; }
+    footer { background:#d8f3dc; padding:20px; text-align:center; margin-top:40px; }
+    .question { margin-bottom:20px; text-align:left; }
+    canvas { background:white; border:1px solid #ccc; margin-top:20px; border-radius:8px; }
+    #quizForm { background:#fff; padding:20px; border-radius:12px; }
   </style>
 </head>
 <body>
   <header>
     <h1>🌳 Stop Deforestation</h1>
     <nav>
+      <a href="#intro">Home</a>
       <a href="#causes">Causes</a>
       <a href="#effects">Effects</a>
       <a href="#solutions">Solutions</a>
@@ -36,7 +39,7 @@
       Every year, millions of hectares of forest are destroyed — an area nearly the size of England. 
       This crisis threatens biodiversity, accelerates climate change, and harms indigenous communities.
     </p>
-    <img src="https://i.imgur.com/OYrXj2c.jpg" alt="Forest">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Deforestation_in_Amazonia.jpg/640px-Deforestation_in_Amazonia.jpg" alt="Amazon Deforestation">
   </section>
 
   <section id="causes">
@@ -48,7 +51,7 @@
       <li>🔥 Slash-and-burn practices</li>
       <li>⛏️ Mining and resource extraction</li>
     </ul>
-    <img src="https://i.imgur.com/cj6TxSh.jpg" alt="Deforestation causes">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Deforestation_Madagascar.jpg/640px-Deforestation_Madagascar.jpg" alt="Cleared land">
   </section>
 
   <section id="effects">
@@ -60,7 +63,7 @@
       <li>🏚️ Impact on indigenous peoples</li>
       <li>🌪️ Increased natural disasters (floods, landslides)</li>
     </ul>
-    <img src="https://i.imgur.com/Wb4SH0W.jpg" alt="Effects">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Deforestation_and_cattle_in_Rond%C3%B4nia%2C_Brazil.jpg/640px-Deforestation_and_cattle_in_Rond%C3%B4nia%2C_Brazil.jpg" alt="Cattle ranching Amazon">
   </section>
 
   <section id="solutions">
@@ -72,7 +75,7 @@
       <li>🍫 Support sustainable agriculture (shade-grown coffee, fair-trade chocolate, palm-oil alternatives)</li>
       <li>👩‍🏫 Educating communities and spreading awareness</li>
     </ul>
-    <img src="https://i.imgur.com/3F2p5l6.jpg" alt="Reforestation">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Tree_plantation.jpg/640px-Tree_plantation.jpg" alt="Tree planting">
   </section>
 
   <!-- Simulation -->
@@ -169,7 +172,6 @@
     const totalForest = 4000000000; // 4 billion hectares globally
     const chart = document.getElementById("chart");
     const ctx = chart.getContext("2d");
-    let time = 0;
     let dataPoints = [];
 
     function drawChart() {
@@ -178,7 +180,7 @@
       ctx.moveTo(0, chart.height);
       for (let i=0; i<dataPoints.length; i++) {
         let x = i * (chart.width/100);
-        let y = chart.height - (dataPoints[i]/totalForest * chart.height * 10); 
+        let y = chart.height - (dataPoints[i]/totalForest * chart.height * 100);
         ctx.lineTo(x, y);
       }
       ctx.strokeStyle = "green";
