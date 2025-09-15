@@ -22,6 +22,14 @@
     .question { margin:20px auto; max-width:600px; text-align:left; }
     canvas { background:white; border:1px solid #ccc; margin-top:20px; border-radius:8px; }
     #quizForm { background:#fff; padding:20px; border-radius:12px; display:inline-block; text-align:left; }
+
+    #progressBarContainer { width:600px; height:20px; background:#ccc; border-radius:10px; margin:20px auto; }
+    #progressBar { height:100%; width:0%; background:#2d6a4f; border-radius:10px; }
+
+    #quizResult { font-weight:bold; margin-top:15px; }
+    #quizFeedback { text-align:left; max-width:600px; margin:15px auto; }
+    .correct { color:green; font-weight:bold; }
+    .wrong { color:red; font-weight:bold; }
   </style>
 </head>
 <body>
@@ -91,14 +99,22 @@
     </p>
     <button onclick="startSim()">Start Simulation</button>
     <button onclick="stopSim()">Stop Simulation</button>
-    <p>Forest lost: <span id="hectares">0</span> hectares (<span id="percent">0</span>% of global forests)</p>
+    <p>
+      Forest lost: <span id="hectares">0</span> hectares 
+      (<span id="percent">0</span>% of global forests) <br>
+      Time: <span id="time">0</span> seconds
+    </p>
+
+    <!-- Progress bar -->
+    <div id="progressBarContainer"><div id="progressBar"></div></div>
+
+    <!-- Line chart -->
     <canvas id="chart" width="600" height="300"></canvas>
   </section>
 
   <section id="quiz">
     <h2>Deforestation Quiz</h2>
     <form id="quizForm">
-      <!-- Quiz questions (same as before) -->
       <div class="question"><p>1. What is the main cause of deforestation?</p><input type="radio" name="q1" value="a"> Logging<br><input type="radio" name="q1" value="b"> Agriculture<br><input type="radio" name="q1" value="c"> Mining<br></div>
       <div class="question"><p>2. How much of Earth’s land is forest?</p><input type="radio" name="q2" value="a"> 10%<br><input type="radio" name="q2" value="b"> 31%<br><input type="radio" name="q2" value="c"> 55%<br></div>
       <div class="question"><p>3. Which continent loses forests fastest?</p><input type="radio" name="q3" value="a"> Africa<br><input type="radio" name="q3" value="b"> South America<br><input type="radio" name="q3" value="c"> Asia<br></div>
@@ -112,6 +128,7 @@
       <button type="button" onclick="submitQuiz()">Submit</button>
     </form>
     <p id="quizResult"></p>
+    <div id="quizFeedback"></div>
   </section>
 
   <footer>
@@ -120,52 +137,81 @@
 
   <script>
     // --- Simulation ---
-    let hectares = 0, percent = 0, interval;
-    const totalForest = 4000000000;
+    let hectares = 0, percent = 0, interval, seconds = 0;
+    const totalForest = 4000000000; // ~4B hectares
     const ctx = document.getElementById("chart").getContext("2d");
     let dataPoints = [];
 
     function drawChart() {
       ctx.clearRect(0,0,600,300);
+
+      // axes
       ctx.strokeStyle = "#aaa";
       ctx.beginPath();
-      ctx.moveTo(40, 10); ctx.lineTo(40, 280); ctx.lineTo(580, 280); ctx.stroke();
+      ctx.moveTo(40, 10);
+      ctx.lineTo(40, 280);
+      ctx.lineTo(580, 280);
+      ctx.stroke();
+
+      // graph
       ctx.beginPath();
       ctx.moveTo(40,280);
       for (let i=0; i<dataPoints.length; i++) {
         let x = 40 + i * (540/100);
-        let y = 280 - (dataPoints[i] / 50);
+        let y = 280 - (dataPoints[i] / 50); // scale steeper
         if (y < 10) y = 10;
         ctx.lineTo(x,y);
       }
       ctx.strokeStyle="green"; ctx.lineWidth=2; ctx.stroke();
+
+      // labels
       ctx.fillStyle="black"; ctx.font="12px Arial";
-      ctx.fillText("Time →", 500, 295); ctx.fillText("Hectares lost ↑", 5, 20);
+      ctx.fillText("Time (s) →", 500, 295);
+      ctx.fillText("Hectares lost ↑", 5, 20);
     }
+
     function startSim() {
       if(interval) return;
       interval = setInterval(()=>{
+        seconds++;
         hectares += 0.7;
         percent = ((hectares/totalForest)*100).toFixed(6);
+
         document.getElementById("hectares").textContent = hectares.toFixed(1);
         document.getElementById("percent").textContent = percent;
+        document.getElementById("time").textContent = seconds;
+
+        // progress bar
+        document.getElementById("progressBar").style.width = percent + "%";
+
         dataPoints.push(hectares);
         if (dataPoints.length > 100) dataPoints.shift();
         drawChart();
       },1000);
     }
+
     function stopSim() { clearInterval(interval); interval = null; }
 
     // --- Quiz ---
     const answers={q1:"b",q2:"b",q3:"b",q4:"b",q5:"b",q6:"a",q7:"c",q8:"b",q9:"b",q10:"b"};
     function submitQuiz(){
-      let score=0;
+      let score=0, feedbackHTML="";
       for(let q in answers){
         let sel=document.querySelector(`input[name="${q}"]:checked`);
-        if(sel && sel.value===answers[q]) score++;
+        if(sel){
+          if(sel.value===answers[q]){
+            score++;
+            feedbackHTML+=`<p class="correct">✅ Question ${q.slice(1)} correct!</p>`;
+          } else {
+            feedbackHTML+=`<p class="wrong">❌ Question ${q.slice(1)} wrong. Correct answer: <b>${answers[q].toUpperCase()}</b></p>`;
+          }
+        } else {
+          feedbackHTML+=`<p class="wrong">❌ Question ${q.slice(1)} not answered. Correct: <b>${answers[q].toUpperCase()}</b></p>`;
+        }
       }
       document.getElementById("quizResult").textContent=
         `You scored ${score}/10. ${score>=7?"🌟 Great job!":"💡 Keep learning!"}`;
+      document.getElementById("quizFeedback").innerHTML = feedbackHTML;
     }
   </script>
 </body>
