@@ -4,57 +4,20 @@
   <meta charset="UTF-8">
   <title>Deforestation Awareness</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4fff4;
-      line-height: 1.6;
-    }
-    header {
-      background: #2d6a4f;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-    }
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    section {
-      padding: 40px 20px;
-      text-align: center;
-      border-bottom: 1px solid #ccc;
-    }
-    section h2 {
-      color: #2d6a4f;
-    }
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: #40916c;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #1b4332;
-    }
-    .hidden {
-      display: none;
-      margin-top: 10px;
-      color: #333;
-    }
-    footer {
-      background: #d8f3dc;
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-    }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4fff4; line-height: 1.6; }
+    header { background: #2d6a4f; color: white; padding: 20px; text-align: center; position: sticky; top: 0; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+    section { padding: 40px 20px; border-bottom: 1px solid #ccc; text-align: center; }
+    section h2 { color: #2d6a4f; margin-bottom: 15px; }
+    button { margin: 8px; padding: 10px 20px; background: #40916c; color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #1b4332; }
+    .hidden { display: none; margin-top: 10px; }
+    img { max-width: 80%; margin: 10px auto; display: block; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+    .gallery img { width: 250px; display: inline-block; margin: 10px; }
+    footer { background: #d8f3dc; text-align: center; padding: 15px; font-size: 14px; }
+    #forest { font-size: 28px; margin-top: 15px; word-break: break-word; }
+    .quiz { margin: 20px auto; max-width: 600px; text-align: left; }
+    .quiz p { font-weight: bold; }
   </style>
 </head>
 <body>
@@ -64,68 +27,166 @@
       <a href="#home">Home</a>
       <a href="#causes">Causes</a>
       <a href="#problems">Problems</a>
+      <a href="#people">Impacts on People</a>
       <a href="#solutions">Solutions</a>
+      <a href="#hotspots">Hotspots</a>
+      <a href="#simulation">Simulation</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#gallery">Gallery</a>
     </nav>
   </header>
 
+  <!-- HOME -->
   <section id="home">
     <h2>Welcome</h2>
     <p>
-      Forests cover about 31% of the Earth’s land area, but we are losing them at an alarming rate.  
-      This website explains the <b>causes</b>, <b>problems</b>, and <b>solutions</b> to deforestation.
+      Forests cover about 31% of Earth’s land, but we are losing <b>10 million hectares every year</b>.  
+      That’s equal to <b>27 football fields every minute</b>.  
+      Forests are essential for clean air, water, biodiversity, and climate stability.
     </p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Deforestation_in_Riau_province.jpg" alt="Deforestation">
     <p>
-      Estimated trees lost since you opened this page:
+      Estimated trees lost since you opened this page:  
       <span id="counter" style="font-weight: bold; font-size: 20px;">0</span>
     </p>
   </section>
 
+  <!-- CAUSES -->
   <section id="causes">
     <h2>Causes of Deforestation</h2>
-    <p>Click below to reveal the main drivers:</p>
-    <button onclick="toggle('cause1')">Agriculture</button>
-    <p id="cause1" class="hidden">🌾 Large areas are cleared to make way for crops like soy, palm oil, and cattle ranching.</p>
+    <p>Click to expand details:</p>
+    <button onclick="toggle('cause1')">🌾 Agriculture (80% of global deforestation)</button>
+    <p id="cause1" class="hidden">
+      Huge areas are cleared for palm oil, soybeans, and cattle ranching.  
+      Example: Amazon rainforest loses vast land to cattle farms.  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Amazon_deforestation_CIB.jpg" alt="Agriculture">
+    </p>
 
-    <button onclick="toggle('cause2')">Logging</button>
-    <p id="cause2" class="hidden">🪵 Trees are cut down for timber, paper, and fuel, often unsustainably.</p>
+    <button onclick="toggle('cause2')">🪵 Logging</button>
+    <p id="cause2" class="hidden">
+      Commercial and illegal logging remove trees faster than they regrow.  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Illegal_logging_in_Kalimantan.jpg" alt="Logging">
+    </p>
 
-    <button onclick="toggle('cause3')">Urbanization</button>
-    <p id="cause3" class="hidden">🏗️ Expanding cities and infrastructure destroy natural habitats.</p>
+    <button onclick="toggle('cause3')">🏗️ Urbanization</button>
+    <p id="cause3" class="hidden">
+      Expanding cities, highways, and dams replace forests.  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Deforestation_in_Brazil.jpg" alt="Urbanization">
+    </p>
 
-    <button onclick="toggle('cause4')">Fires</button>
-    <p id="cause4" class="hidden">🔥 Some are natural, but many are man-made to clear land quickly.</p>
+    <button onclick="toggle('cause4')">🔥 Fires</button>
+    <p id="cause4" class="hidden">
+      Forest fires, natural and man-made, destroy habitats rapidly.  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Forest_fire_in_the_Amazon.jpg" alt="Fire">
+    </p>
   </section>
 
+  <!-- PROBLEMS -->
   <section id="problems">
-    <h2>Problems Caused by Deforestation</h2>
-    <p>Click below to reveal the consequences:</p>
-    <button onclick="toggle('prob1')">Climate Change</button>
-    <p id="prob1" class="hidden">🌍 Trees absorb carbon dioxide; without them, greenhouse gases increase.</p>
+    <h2>Environmental Problems</h2>
+    <button onclick="toggle('prob1')">🌍 Climate Change</button>
+    <p id="prob1" class="hidden">
+      Forests store 289 billion tons of carbon. Deforestation releases CO₂, worsening global warming.  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Greenhouse_Effect.svg" alt="Climate change">
+    </p>
 
-    <button onclick="toggle('prob2')">Biodiversity Loss</button>
-    <p id="prob2" class="hidden">🐒 Millions of species lose their homes and face extinction.</p>
+    <button onclick="toggle('prob2')">🐒 Biodiversity Loss</button>
+    <p id="prob2" class="hidden">
+      80% of land animals live in forests. Orangutans, tigers, and jaguars are losing their homes.  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Orangutan_in_Borneo.jpg" alt="Orangutan">
+    </p>
 
-    <button onclick="toggle('prob3')">Water Cycle Disruption</button>
-    <p id="prob3" class="hidden">💧 Forests help regulate rainfall; without them, droughts and floods worsen.</p>
+    <button onclick="toggle('prob3')">💧 Water Cycle</button>
+    <p id="prob3" class="hidden">
+      Forests regulate rainfall and water storage. Without them, droughts and floods rise.  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Drought_in_Brazil.jpg" alt="Drought">
+    </p>
 
-    <button onclick="toggle('prob4')">Soil Erosion</button>
-    <p id="prob4" class="hidden">🌪️ Without tree roots, soil washes away, reducing fertility.</p>
+    <button onclick="toggle('prob4')">🌪️ Soil Erosion</button>
+    <p id="prob4" class="hidden">
+      Tree roots stabilize soil. Without forests, fertile soil washes away.  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Soil_erosion_in_Nepal.jpg" alt="Soil erosion">
+    </p>
   </section>
 
+  <!-- IMPACTS ON PEOPLE -->
+  <section id="people">
+    <h2>Impacts on People</h2>
+    <p>
+      Over <b>1.6 billion people</b> depend on forests for food, medicine, or income.  
+      Deforestation causes:
+    </p>
+    <ul style="text-align:left; max-width:600px; margin:auto;">
+      <li>Loss of indigenous lands and cultures.</li>
+      <li>Reduced clean water sources for nearby communities.</li>
+      <li>Increased spread of zoonotic diseases like Ebola and COVID-19.</li>
+    </ul>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Indigenous_people_in_the_Amazon.jpg" alt="Indigenous people">
+  </section>
+
+  <!-- SOLUTIONS -->
   <section id="solutions">
-    <h2>Solutions to Deforestation</h2>
-    <p>Click below to reveal what we can do:</p>
-    <button onclick="toggle('sol1')">Plant Trees</button>
-    <p id="sol1" class="hidden">🌱 Reforestation and afforestation projects restore lost forests.</p>
+    <h2>Solutions</h2>
+    <button onclick="toggle('sol1')">🌱 Reforestation</button>
+    <p id="sol1" class="hidden">Planting trees and restoring ecosystems worldwide.</p>
 
-    <button onclick="toggle('sol2')">Stronger Laws</button>
-    <p id="sol2" class="hidden">📜 Governments must enforce regulations to stop illegal logging.</p>
+    <button onclick="toggle('sol2')">📜 Stronger Laws</button>
+    <p id="sol2" class="hidden">Enforce bans on illegal logging and protect indigenous lands.</p>
 
-    <button onclick="toggle('sol3')">Sustainable Products</button>
-    <p id="sol3" class="hidden">🛒 Buy certified wood, paper, and food that don’t harm forests.</p>
+    <button onclick="toggle('sol3')">🛒 Sustainable Choices</button>
+    <p id="sol3" class="hidden">Buy FSC-certified wood, reduce meat, choose palm-oil-free products.</p>
 
-    <button onclick="toggle('sol4')">Awareness & Action</button>
-    <p id="sol4" class="hidden">🧑‍🤝‍🧑 Educating others and supporting NGOs helps spread change.</p>
+    <button onclick="toggle('sol4')">🧑‍🤝‍🧑 Awareness & Action</button>
+    <p id="sol4" class="hidden">Support NGOs, spread awareness, and join environmental movements.</p>
+  </section>
+
+  <!-- HOTSPOTS -->
+  <section id="hotspots">
+    <h2>Global Deforestation Hotspots</h2>
+    <p>These regions face the highest deforestation rates:</p>
+    <ul style="text-align:left; max-width:600px; margin:auto;">
+      <li><b>Amazon Rainforest</b> – Brazil, Peru, Colombia.</li>
+      <li><b>Congo Basin</b> – Central Africa.</li>
+      <li><b>Southeast Asia</b> – Indonesia, Malaysia, Philippines.</li>
+    </ul>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Amazon_rainforest.jpg" alt="Amazon">
+  </section>
+
+  <!-- SIMULATION -->
+  <section id="simulation">
+    <h2>Deforestation Simulation</h2>
+    <p>Click to cut trees manually, or watch them disappear automatically:</p>
+    <button onclick="cutTree()">Cut One Tree</button>
+    <button onclick="autoDeforest()">Start Auto-Cut</button>
+    <div id="forest">🌳🌳🌳🌳🌳🌳🌳🌳🌳🌳</div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>Test Your Knowledge</h2>
+    <div class="quiz">
+      <p>1. What percentage of land animals live in forests?</p>
+      <button onclick="checkAnswer(this, true)">80%</button>
+      <button onclick="checkAnswer(this, false)">20%</button>
+
+      <p>2. What is the main driver of deforestation?</p>
+      <button onclick="checkAnswer(this, true)">Agriculture</button>
+      <button onclick="checkAnswer(this, false)">Urbanization</button>
+
+      <p>3. Which forest is known as the "lungs of the Earth"?</p>
+      <button onclick="checkAnswer(this, true)">Amazon Rainforest</button>
+      <button onclick="checkAnswer(this, false)">Taiga Forest</button>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <h2>Forest Gallery</h2>
+    <div class="gallery">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Tropical_rainforest.jpg" alt="Rainforest">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Borneo_Forest.jpg" alt="Borneo forest">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Deforestation_in_Amazon.jpg" alt="Amazon deforestation">
+    </div>
   </section>
 
   <footer>
@@ -133,17 +194,48 @@
   </footer>
 
   <script>
-    // Tree loss counter (~27 trees per second globally)
+    // Tree loss counter
     let trees = 0;
     setInterval(() => {
       trees += 27;
       document.getElementById("counter").textContent = trees.toLocaleString();
     }, 1000);
 
-    // Toggle info sections
+    // Toggle function
     function toggle(id) {
-      let el = document.getElementById(id);
-      el.classList.toggle("hidden");
+      document.getElementById(id).classList.toggle("hidden");
+    }
+
+    // Simulation
+    function cutTree() {
+      let forest = document.getElementById("forest");
+      if (forest.textContent.includes("🌳")) {
+        forest.textContent = forest.textContent.replace("🌳", "🪓");
+      } else {
+        alert("All trees are gone... 🌍💔");
+      }
+    }
+    function autoDeforest() {
+      let interval = setInterval(() => {
+        let forest = document.getElementById("forest");
+        if (forest.textContent.includes("🌳")) {
+          forest.textContent = forest.textContent.replace("🌳", "🪓");
+        } else {
+          clearInterval(interval);
+          alert("The forest is gone. This is what deforestation does.");
+        }
+      }, 700);
+    }
+
+    // Quiz
+    function checkAnswer(button, correct) {
+      if (correct) {
+        button.style.background = "#2d6a4f";
+        button.textContent = "✅ Correct!";
+      } else {
+        button.style.background = "#d00000";
+        button.textContent = "❌ Wrong!";
+      }
     }
   </script>
 </body>
