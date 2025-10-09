@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🌍 Deforestation Awareness</title>
+<title>🌍 Deforestation Awareness Project</title>
 <style>
   body {
     margin: 0;
@@ -91,18 +91,64 @@
   .explanation { display: none; background: #f0f9f0; padding: 10px; border-left: 4px solid #52b788; border-radius: 6px; margin-top: 5px; }
   footer { background: #eafaf1; padding: 15px; margin-top: 40px; border-top: 2px solid #b7e4c7; }
   .credits { font-size: 0.9em; color: #4a654f; margin-top: 10px; }
+  ul.biblio { text-align: left; line-height: 1.6; }
+
+  /* Purpose page */
+  #purposePage {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(180deg, #40916c, #74c69d);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    z-index: 100;
+  }
+  #purposePage h1 { font-size: 2.5em; margin-bottom: 10px; }
+  #purposePage p { font-size: 1.2em; max-width: 700px; margin-bottom: 20px; }
+  #purposePage button {
+    background: white;
+    color: #2d6a4f;
+    padding: 12px 24px;
+    font-weight: bold;
+    font-size: 1em;
+    border: none;
+    border-radius: 12px;
+  }
+  #purposePage button:hover {
+    background: #b7e4c7;
+  }
 </style>
 </head>
 <body>
 
+<!-- Purpose Page -->
+<div id="purposePage">
+  <h1>🌳 Welcome to the Deforestation Awareness Project</h1>
+  <p>
+    This website aims to educate people about the causes, effects, and solutions to deforestation.  
+    It includes interactive sections, a simulation showing forest loss over time, and a quiz to test your knowledge.  
+    Let’s learn how we can protect our forests and secure a sustainable future for our planet.
+  </p>
+  <button onclick="startWebsite()">Start Learning 🌍</button>
+</div>
+
+<!-- Main Site -->
+<div id="mainContent" style="display:none;">
+
 <header>
-  <h1>🌳 Save Our Forests</h1>
+  <h1>🌍 Save Our Forests</h1>
   <nav>
     <a href="#causes">Causes</a>
     <a href="#effects">Effects</a>
     <a href="#solutions">Solutions</a>
     <a href="#simulation">Simulation</a>
     <a href="#quiz">Quiz</a>
+    <a href="#bibliography">Sources</a>
   </nav>
 </header>
 
@@ -183,6 +229,17 @@
   <p id="quiz-result"></p>
 </section>
 
+<section id="bibliography">
+  <h2>📚 Bibliography / Sources</h2>
+  <ul class="biblio">
+    <li>Food and Agriculture Organization (FAO). “The State of the World’s Forests 2022.” <a href="https://www.fao.org/state-of-forests/en/" target="_blank">fao.org</a></li>
+    <li>World Wildlife Fund (WWF). “Deforestation and Forest Degradation.” <a href="https://www.worldwildlife.org/threats/deforestation-and-forest-degradation" target="_blank">worldwildlife.org</a></li>
+    <li>National Geographic. “Deforestation.” <a href="https://www.nationalgeographic.com/environment/article/deforestation" target="_blank">nationalgeographic.com</a></li>
+    <li>United Nations Environment Programme (UNEP). “Forests and Climate Change.” <a href="https://www.unep.org/explore-topics/forests" target="_blank">unep.org</a></li>
+    <li>Global Forest Watch. “Deforestation Data & Monitoring.” <a href="https://www.globalforestwatch.org/" target="_blank">globalforestwatch.org</a></li>
+  </ul>
+</section>
+
 <footer>
   <p>© 2025 Deforestation Awareness Project 🌱</p>
   <div class="credits">
@@ -191,8 +248,16 @@
   </div>
 </footer>
 
+</div>
+
 <script>
-  // --- Expandable cards ---
+  // --- Purpose Page Function ---
+  function startWebsite() {
+    document.getElementById("purposePage").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+  }
+
+  // --- Expandable Cards ---
   function toggleInfo(card) {
     const extra = card.querySelector(".extra");
     extra.style.display = extra.style.display === "block" ? "none" : "block";
@@ -201,22 +266,24 @@
   // --- Simulation ---
   let hectares = 0, percent = 0, interval, seconds = 0;
   const totalForest = 4000000000;
-  const ctx = document.getElementById("chart").getContext("2d");
+  const ctx = document.createElement('canvas').getContext("2d");
   let dataPoints = [];
+  const canvas = document.getElementById("chart");
+  const c = canvas.getContext("2d");
 
   function drawChart() {
-    ctx.clearRect(0,0,600,300);
-    ctx.strokeStyle = "#aaa";
-    ctx.beginPath(); ctx.moveTo(40,10); ctx.lineTo(40,280); ctx.lineTo(580,280); ctx.stroke();
+    c.clearRect(0,0,600,300);
+    c.strokeStyle = "#aaa";
+    c.beginPath(); c.moveTo(40,10); c.lineTo(40,280); c.lineTo(580,280); c.stroke();
 
-    ctx.beginPath(); ctx.moveTo(40,280);
+    c.beginPath(); c.moveTo(40,280);
     for (let i=0; i<dataPoints.length; i++) {
       let x = 40 + i * (540/100);
       let y = 280 - (dataPoints[i] / 2);
       if (y < 10) y = 10;
-      ctx.lineTo(x,y);
+      c.lineTo(x,y);
     }
-    ctx.strokeStyle = "#2d6a4f"; ctx.lineWidth = 2; ctx.stroke();
+    c.strokeStyle = "#2d6a4f"; c.lineWidth = 2; c.stroke();
   }
 
   function startSim() {
