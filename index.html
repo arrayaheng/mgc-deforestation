@@ -6,7 +6,7 @@
 <style>
   body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(180deg, #e8f5e9, #c8e6c9);
     color: #2e4633;
     text-align: center;
@@ -90,6 +90,7 @@
   .quiz-question { text-align: left; margin-bottom: 15px; }
   .explanation { display: none; background: #f0f9f0; padding: 10px; border-left: 4px solid #52b788; border-radius: 6px; margin-top: 5px; }
   footer { background: #eafaf1; padding: 15px; margin-top: 40px; border-top: 2px solid #b7e4c7; }
+  .credits { font-size: 0.9em; color: #4a654f; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -107,29 +108,58 @@
 
 <section id="intro">
   <h2>Why It Matters</h2>
-  <p>Every minute, forests the size of 30 football fields are lost worldwide. Forests clean our air, store carbon, and host 80% of land species. Together, we can make a change 🌎.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Amazon_deforestation.jpg" width="500" style="border-radius:10px;">
+  <p>Forests cover nearly 31% of the planet's land area and provide essential services — absorbing carbon dioxide, producing oxygen, and maintaining biodiversity. Yet, every year, about 10 million hectares of forest are lost due to human activity.</p>
+  <p>This loss contributes to 20% of global carbon emissions, worsens climate change, and disrupts the lives of indigenous communities who depend on forests for food and culture.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Amazon_deforestation.jpg" width="500" style="border-radius:10px; margin-top:10px;">
 </section>
 
 <section id="causes">
   <h2>Causes of Deforestation</h2>
 
   <div class="card" onclick="toggleInfo(this)">
-    <h3>🌾 Agriculture Expansion</h3>
-    <p>Forests are cleared for plantations and livestock.</p>
-    <div class="extra">Agriculture is responsible for around 80% of global deforestation. Palm oil, soy, and cattle farming are leading causes in tropical regions.</div>
+    <h3>🌾 Agricultural Expansion</h3>
+    <p>Forests are cleared to create land for crops and livestock.</p>
+    <div class="extra">Agriculture causes around 80% of global deforestation. Palm oil, soy, and cattle ranching dominate this issue. When forest land becomes farmland, biodiversity drops and soil quality declines, increasing erosion and flooding risks.</div>
   </div>
 
   <div class="card" onclick="toggleInfo(this)">
     <h3>🪵 Logging</h3>
-    <p>Overharvesting wood for furniture, paper, and fuel.</p>
-    <div class="extra">Illegal and unsustainable logging destroys habitats, affects indigenous people, and reduces carbon storage capacity.</div>
+    <p>Cutting trees for timber, paper, and fuelwood.</p>
+    <div class="extra">Illegal and unsustainable logging contributes to habitat loss and greenhouse gas emissions. Many tropical countries suffer from poor enforcement, allowing companies to harvest wood faster than trees can regrow.</div>
   </div>
 
   <div class="card" onclick="toggleInfo(this)">
-    <h3>🏗️ Urban Expansion</h3>
-    <p>Cities grow into forested areas.</p>
-    <div class="extra">Urbanization replaces trees with buildings and roads, causing habitat loss and heat islands in cities.</div>
+    <h3>🏗️ Urban and Infrastructure Development</h3>
+    <p>As cities expand, forests are replaced by roads and buildings.</p>
+    <div class="extra">Urbanization fragments ecosystems, increases surface temperatures, and reduces natural water absorption, leading to floods and poor air quality.</div>
+  </div>
+</section>
+
+<section id="effects">
+  <h2>Effects of Deforestation</h2>
+
+  <div class="card" onclick="toggleInfo(this)">
+    <h3>🌡️ Climate Change</h3>
+    <p>Trees absorb CO₂; losing them speeds global warming.</p>
+    <div class="extra">Forests act as carbon sinks. When cut or burned, they release stored carbon, contributing to rising global temperatures and extreme weather patterns.</div>
+  </div>
+
+  <div class="card" onclick="toggleInfo(this)">
+    <h3>🐘 Loss of Biodiversity</h3>
+    <p>Thousands of species lose their habitats every year.</p>
+    <div class="extra">Over 80% of terrestrial animals live in forests. Deforestation threatens species like orangutans, tigers, and elephants, pushing many toward extinction.</div>
+  </div>
+
+  <div class="card" onclick="toggleInfo(this)">
+    <h3>💧 Water Cycle Disruption</h3>
+    <p>Trees regulate rainfall and maintain groundwater levels.</p>
+    <div class="extra">When trees vanish, soil dries faster, rivers shrink, and rainfall patterns change — increasing droughts and floods.</div>
+  </div>
+
+  <div class="card" onclick="toggleInfo(this)">
+    <h3>👩‍🌾 Human Impact</h3>
+    <p>Communities lose homes, food sources, and livelihoods.</p>
+    <div class="extra">Indigenous people depend on forests for survival. Deforestation displaces them, destroys traditions, and increases poverty in rural areas.</div>
   </div>
 </section>
 
@@ -154,7 +184,11 @@
 </section>
 
 <footer>
-  <p>© 2025 Deforestation Awareness | Built with ❤️ to protect our planet.</p>
+  <p>© 2025 Deforestation Awareness Project 🌱</p>
+  <div class="credits">
+    Made by <b>Arraya</b> <br>
+    Thanks <b>Cleon</b> for your help 💚
+  </div>
 </footer>
 
 <script>
@@ -189,7 +223,7 @@
     if(interval) return;
     interval = setInterval(()=>{
       seconds++;
-      hectares += Math.random() * 8 + 3;
+      hectares += Math.random() * 8 + 5;
       percent = ((hectares/totalForest)*100).toFixed(6);
       document.getElementById("hectares").textContent = hectares.toFixed(1);
       document.getElementById("percent").textContent = percent;
