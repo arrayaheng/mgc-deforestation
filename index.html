@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MGC Deforestation Project</title>
-  <link rel="icon" type="image/png" href="https://i.imgur.com/q7HzxvI.png" />
+  <link rel="icon" type="image/png" href="https://i.imgur.com/q7HzxvI.png">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: "Segoe UI", sans-serif;
       margin: 0;
       background-color: #ecfdf5;
       color: #1b4332;
@@ -16,8 +16,8 @@
     header {
       background-color: #2d6a4f;
       color: white;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
     }
 
     nav {
@@ -73,6 +73,33 @@
     h1, h2 {
       color: #1b4332;
     }
+
+    button {
+      background-color: #2d6a4f;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #1b4332;
+    }
+
+    .quiz-question {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+    }
   </style>
 </head>
 <body>
@@ -89,120 +116,116 @@
     <a href="#" onclick="showPage('bibliography')">Bibliography</a>
   </nav>
 
+  <!-- About Page -->
   <div id="about" class="content">
     <h2>About This Project</h2>
     <p>
-      This project raises awareness about deforestation — a critical issue affecting global ecosystems, 
-      biodiversity, and climate stability. Through this interactive site, we aim to educate visitors 
-      on the causes, consequences, and importance of protecting forests.
+      This website raises awareness about deforestation — a major global issue that threatens biodiversity,
+      contributes to climate change, and impacts human lives. It was created to educate, inform, and inspire action.
     </p>
     <p>
-      Forests are the lungs of our planet. They store carbon, regulate temperature, and provide habitats 
-      for millions of species. By understanding deforestation and its impacts, we can take steps to build 
-      a more sustainable and greener future.
+      Forests are the Earth's lungs. They absorb carbon dioxide, release oxygen, and provide habitats for 
+      millions of species. Understanding deforestation helps us protect ecosystems and ensure a sustainable future.
     </p>
   </div>
 
+  <!-- Causes Page -->
   <div id="causes" class="content hidden">
     <h2>🔥 Causes of Deforestation</h2>
 
     <div class="card" onclick="toggleInfo(this)">
-      <strong>Logging Industry</strong>
+      <strong>Agricultural Expansion</strong>
       <p class="info hidden">
-        Logging for timber and paper products removes vast forest areas. Unsustainable practices 
-        destroy natural habitats and reduce biodiversity. In many tropical regions, illegal logging 
-        continues to thrive due to weak regulations. Long-term effects include soil erosion, flooding, 
-        and loss of carbon storage. Replanting efforts rarely replace the diversity of lost old-growth trees.
+        The expansion of farmland for crops like soy, palm oil, and cattle grazing accounts for about 70–80% of global deforestation.
+        As global food demand rises, forests are cleared to create new farmland, especially in tropical regions such as the Amazon Basin.
       </p>
     </div>
 
     <div class="card" onclick="toggleInfo(this)">
-      <strong>Agricultural Expansion</strong>
+      <strong>Logging and Timber Industry</strong>
       <p class="info hidden">
-        Forests are cleared for crops like soy, coffee, and palm oil, as well as for cattle ranching. 
-        Over 70% of tropical deforestation is linked to agricultural expansion. The loss of forest 
-        cover contributes to global warming and endangers native species. Sustainable farming and 
-        consumer awareness are vital to reducing this impact.
+        Logging provides materials for construction, paper, and furniture. However, unsustainable and illegal logging operations destroy
+        millions of hectares each year. The removal of old-growth trees affects carbon storage and species habitats.
+      </p>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Mining and Extraction</strong>
+      <p class="info hidden">
+        Mining for resources such as gold, coal, and rare earth minerals leads to extensive forest clearance. Toxic runoff contaminates
+        rivers, displacing communities and damaging wildlife.
       </p>
     </div>
 
     <div class="card" onclick="toggleInfo(this)">
       <strong>Urbanization</strong>
       <p class="info hidden">
-        Expanding cities require land for housing, roads, and industries, often replacing natural 
-        forests. Urbanization fragments habitats and reduces green spaces. As populations grow, 
-        sustainable planning becomes crucial to preserve ecosystems.
-      </p>
-    </div>
-
-    <div class="card" onclick="toggleInfo(this)">
-      <strong>Mining Activities</strong>
-      <p class="info hidden">
-        Mining for resources like gold, coal, and rare metals causes severe deforestation. It destroys 
-        ecosystems, contaminates rivers with toxic waste, and displaces local communities. Rehabilitation 
-        projects are expensive and take decades to recover even a fraction of the lost biodiversity.
+        Expanding cities need more land for infrastructure, housing, and industries. Urbanization fragments ecosystems, 
+        isolates wildlife, and increases human impact on natural landscapes.
       </p>
     </div>
   </div>
 
+  <!-- Effects Page -->
   <div id="effects" class="content hidden">
     <h2>🌍 Effects of Deforestation</h2>
 
     <div class="card" onclick="toggleInfo(this)">
       <strong>Loss of Biodiversity</strong>
       <p class="info hidden">
-        Forests host more than 80% of the world’s terrestrial species. When trees are destroyed, 
-        countless animals and plants lose their homes. This causes imbalances in the ecosystem 
-        and pushes many species toward extinction.
+        Over 80% of terrestrial species live in forests. When habitats are destroyed, thousands of species face extinction, 
+        upsetting food chains and weakening ecosystems that humans rely on.
       </p>
     </div>
 
     <div class="card" onclick="toggleInfo(this)">
       <strong>Climate Change</strong>
       <p class="info hidden">
-        Trees absorb carbon dioxide. Cutting them down releases stored carbon back into the atmosphere, 
-        accelerating global warming. Deforestation contributes to about 10% of total greenhouse gas emissions.
+        Trees act as carbon sinks. Deforestation releases stored CO₂, accelerating global warming. 
+        It contributes to approximately 10% of global greenhouse gas emissions annually.
       </p>
     </div>
 
     <div class="card" onclick="toggleInfo(this)">
-      <strong>Disruption of Water Cycles</strong>
+      <strong>Water Cycle Disruption</strong>
       <p class="info hidden">
-        Forests regulate rainfall and maintain soil moisture. Without them, droughts and floods become 
-        more frequent. This harms agriculture, freshwater supplies, and human settlements.
+        Forests help regulate rainfall and maintain soil moisture. When removed, rainfall patterns change, 
+        leading to droughts, floods, and reduced agricultural productivity.
       </p>
     </div>
 
     <div class="card" onclick="toggleInfo(this)">
-      <strong>Economic Impact</strong>
+      <strong>Soil Erosion</strong>
       <p class="info hidden">
-        Deforestation initially boosts economies through logging and agriculture, but long-term damage 
-        to ecosystems leads to loss of natural resources, reduced soil fertility, and declining water quality. 
-        The cost of environmental restoration often outweighs short-term gains.
+        Tree roots hold soil together. When cleared, soil erosion increases, 
+        reducing land fertility and causing landslides in vulnerable areas.
       </p>
     </div>
   </div>
 
+  <!-- Quiz Page -->
   <div id="quiz" class="content hidden">
-    <h2>🧠 Quick Quiz</h2>
-    <p>Test your knowledge about deforestation!</p>
-    <ol>
-      <li>What percentage of tropical deforestation is linked to agriculture?</li>
-      <li>How does deforestation affect global temperatures?</li>
-      <li>What can individuals do to reduce deforestation?</li>
-      <li>Why is biodiversity important for human survival?</li>
-      <li>How can reforestation help reverse climate change?</li>
-    </ol>
+    <h2>🧠 Deforestation Quiz</h2>
+    <p>Test your knowledge below!</p>
+    <form id="quizForm"></form>
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <p id="quizResult"></p>
   </div>
 
+  <!-- Bibliography -->
   <div id="bibliography" class="content hidden">
     <h2>📚 Bibliography / Sources</h2>
     <ul>
-      <li>World Wildlife Fund (WWF). <i>Deforestation and Forest Degradation</i>. <a href="https://www.worldwildlife.org/threats/deforestation" target="_blank">Link</a></li>
-      <li>National Geographic. <i>Deforestation Explained</i>. <a href="https://www.nationalgeographic.com/environment/article/deforestation" target="_blank">Link</a></li>
-      <li>United Nations Environment Programme (UNEP). <i>Forests and Climate Change</i>. <a href="https://www.unep.org/" target="_blank">Link</a></li>
-      <li>Rainforest Alliance. <i>Why Forests Matter</i>. <a href="https://www.rainforest-alliance.org/" target="_blank">Link</a></li>
-      <li>NASA Earth Observatory. <i>Deforestation Trends</i>. <a href="https://earthobservatory.nasa.gov/" target="_blank">Link</a></li>
+      <li>WWF. (2024). <i>Deforestation and Forest Degradation.</i> https://www.worldwildlife.org/threats/deforestation</li>
+      <li>National Geographic. (2024). <i>Deforestation Explained.</i> https://www.nationalgeographic.com/environment/article/deforestation</li>
+      <li>FAO. (2023). <i>Global Forest Resources Assessment.</i> https://www.fao.org/forest-resources-assessment</li>
+      <li>NASA Earth Observatory. (2023). <i>Global Deforestation Overview.</i> https://earthobservatory.nasa.gov</li>
+      <li>United Nations Environment Programme. (2023). <i>Forests and Climate Change.</i> https://www.unep.org</li>
+      <li>Rainforest Alliance. (2024). <i>What Causes Deforestation?</i> https://www.rainforest-alliance.org</li>
+      <li>World Bank. (2024). <i>Protecting Forest Ecosystems.</i> https://www.worldbank.org</li>
+      <li>Yale Environment 360. (2023). <i>The Global Fight to Save Forests.</i> https://e360.yale.edu</li>
+      <li>ScienceDirect. (2024). <i>Economic Impacts of Deforestation.</i> https://www.sciencedirect.com</li>
+      <li>United Nations FAOStat. (2023). <i>Forest Statistics Database.</i> https://www.fao.org/faostat</li>
     </ul>
   </div>
 
@@ -219,6 +242,41 @@
     function toggleInfo(card) {
       const info = card.querySelector('.info');
       info.classList.toggle('hidden');
+    }
+
+    const quizData = [
+      { q: "What is the largest cause of deforestation globally?", options: ["Mining", "Agriculture", "Urbanization"], correct: 1 },
+      { q: "Which continent loses the most forest each year?", options: ["Africa", "South America", "Asia"], correct: 1 },
+      { q: "What percentage of biodiversity lives in forests?", options: ["20%", "50%", "80%"], correct: 2 },
+      { q: "Which industry is associated with palm oil plantations?", options: ["Food and Cosmetics", "Automotive", "Textiles"], correct: 0 },
+      { q: "Deforestation contributes to what global issue?", options: ["Climate Change", "Ozone Healing", "Arctic Cooling"], correct: 0 },
+      { q: "Which of the following is a sustainable action?", options: ["Reforestation", "Illegal Logging", "Burning Forests"], correct: 0 },
+      { q: "Trees primarily absorb which gas?", options: ["Carbon Dioxide", "Oxygen", "Nitrogen"], correct: 0 },
+      { q: "What happens when forests are removed?", options: ["Soil Erosion", "Rain Increase", "Cleaner Air"], correct: 0 },
+      { q: "What organization actively fights deforestation?", options: ["WWF", "FIFA", "Red Cross"], correct: 0 },
+      { q: "What can individuals do to help?", options: ["Buy recycled products", "Cut more trees", "Ignore the issue"], correct: 0 }
+    ];
+
+    const quizForm = document.getElementById("quizForm");
+    quizData.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.classList.add("quiz-question");
+      div.innerHTML = `<p><strong>${i + 1}. ${q.q}</strong></p>` +
+        q.options.map((opt, j) => `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label>`).join("");
+      quizForm.appendChild(div);
+    });
+
+    function checkAnswers() {
+      let score = 0;
+      quizData.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && parseInt(selected.value) === q.correct) score++;
+      });
+
+      const total = quizData.length;
+      document.getElementById("quizResult").innerHTML =
+        `<strong>You scored ${score}/${total}!</strong><br>` +
+        (score === total ? "Excellent work!" : "Keep learning and try again! ✅");
     }
   </script>
 </body>
