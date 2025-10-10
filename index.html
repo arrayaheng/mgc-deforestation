@@ -5,217 +5,234 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deforestation Awareness</title>
 <style>
-  body {font-family: Arial, sans-serif; margin:0; padding:0; background:#f1f8f4; color:#2d2d2d;}
-  header {background:#2e7d32; color:white; text-align:center; padding:20px 0;}
-  nav {text-align:center; background:#388e3c; padding:10px;}
-  nav a {color:white; text-decoration:none; margin:0 10px; font-weight:bold;}
-  nav a:hover {text-decoration:underline;}
-  section {padding:20px; max-width:900px; margin:auto;}
-  h1,h2,h3{text-align:center;}
-  .card {background:white; border-radius:10px; padding:15px; margin:15px 0; box-shadow:0 2px 5px rgba(0,0,0,0.2); cursor:pointer; transition:all 0.3s ease;}
-  .card:hover{transform:scale(1.02);}
-  .hidden {display:none;}
-  .footer {text-align:center; padding:15px; background:#2e7d32; color:white; margin-top:20px;}
-  .quiz-question{margin-bottom:20px;}
-  button {background:#2e7d32; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;}
-  button:hover {background:#1b5e20;}
-  img {width:100%; border-radius:10px; margin:10px 0;}
-  #chart {border:1px solid #ccc; background:white; border-radius:10px;}
-  #progressContainer {width:100%; background:#ccc; height:15px; border-radius:10px; overflow:hidden;}
-  #progressBar {height:15px; width:0%; background:#2e7d32;}
+  body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f0f9f0; color: #222; }
+  h1, h2 { color: #2f6b2f; }
+  section { padding: 40px; max-width: 900px; margin: auto; }
+  button { background: #2f6b2f; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+  button:hover { background: #3c8f3c; }
+  .card { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 20px; margin: 10px 0; transition: all 0.3s ease; cursor: pointer; }
+  .card:hover { transform: scale(1.02); background: #e8fbe8; }
+  .hidden { display: none; }
+  canvas { border: 1px solid #ccc; background: #fff; margin-top: 10px; }
+  #progressBar { width: 0; height: 10px; background: #2f6b2f; border-radius: 5px; }
+  footer { background: #2f6b2f; color: white; text-align: center; padding: 15px; margin-top: 40px; }
+  #introPage { background: linear-gradient(to bottom right, #74c174, #3a8a3a); color: white; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  #mainContent { display: none; }
+  .source-list { line-height: 1.6; }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Deforestation Awareness</h1>
-  <p>Understand. Act. Protect our forests.</p>
-</header>
+<!-- INTRO PAGE -->
+<div id="introPage">
+  <h1>🌱 Welcome to Deforestation Awareness 🌳</h1>
+  <p style="max-width:600px;">
+    Our planet’s forests are disappearing at an alarming rate. This site aims to spread awareness 
+    about deforestation—its causes, effects, and what we can do to protect the lungs of our Earth. 
+  </p>
+  <button onclick="startSite()">Continue</button>
+</div>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#purpose">Purpose</a>
-  <a href="#causes">Causes</a>
-  <a href="#effects">Effects</a>
-  <a href="#importance">Why It Matters</a>
-  <a href="#simulation">Simulation</a>
-  <a href="#quiz">Quiz</a>
-  <a href="#sources">Sources</a>
-</nav>
-
-<section id="about">
-  <h2>About This Project</h2>
-  <p>This project was created to raise awareness about deforestation and its global impact. It combines research, interactive elements, and visuals to help people understand why forests matter and how deforestation affects our planet. The goal is to inspire environmental responsibility among students and the public.</p>
-  <p><b>Created by:</b> Arraya<br><b>Special thanks:</b> Cleon for his help and contribution in research and layout ideas.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Rainforest_in_Borneo.jpg" alt="Rainforest in Borneo">
-</section>
+<!-- MAIN CONTENT -->
+<div id="mainContent">
 
 <section id="purpose">
-  <h2>Purpose</h2>
-  <p>The purpose of this website is to educate visitors about the causes, effects, and urgency of deforestation. By presenting both information and interactive content, the website aims to motivate everyone to take part in sustainable solutions such as reforestation, responsible consumption, and climate action.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Forest_canopy_during_sunset.jpg" alt="Forest canopy at sunset">
+  <h2>🌍 Purpose</h2>
+  <p>
+    This project was made to help people understand the importance of forests and the impact of deforestation 
+    on our world. It encourages awareness and positive change toward sustainability.
+  </p>
 </section>
 
 <section id="causes">
-  <h2>Causes of Deforestation</h2>
-
+  <h2>🔥 Causes of Deforestation</h2>
   <div class="card" onclick="toggleInfo('cause1')">
-    <h3>Agricultural Expansion 🌾</h3>
-    <p>Clearing forests to grow crops and raise livestock.</p>
-    <div id="cause1" class="hidden">
-      <p>Agriculture drives about 80% of global deforestation. Forests are burned or cleared to plant soy, palm oil, or to create grazing land for cattle, especially in tropical regions like the Amazon and Southeast Asia.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Amazon_Deforestation.jpg" alt="Amazon deforestation">
-    </div>
+    Logging Industry
+    <p id="cause1" class="hidden">Logging for timber and paper products removes massive forest areas. 
+    Unsustainable practices lead to habitat destruction and loss of biodiversity.</p>
   </div>
-
   <div class="card" onclick="toggleInfo('cause2')">
-    <h3>Logging Industry 🪵</h3>
-    <p>Harvesting wood for construction and paper.</p>
-    <div id="cause2" class="hidden">
-      <p>Unsustainable logging reduces forest cover and harms biodiversity. Illegal logging contributes heavily to this, especially in developing countries with weak forest governance.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Logging_operations.jpg" alt="Logging operations">
-    </div>
+    Agricultural Expansion
+    <p id="cause2" class="hidden">Forests are cleared for crops and livestock, especially palm oil and soy. 
+    This accounts for over 70% of tropical deforestation.</p>
   </div>
-
   <div class="card" onclick="toggleInfo('cause3')">
-    <h3>Urbanization and Infrastructure 🏙️</h3>
-    <p>Building roads, houses, and cities where forests once stood.</p>
-    <div id="cause3" class="hidden">
-      <p>Growing populations and city expansion lead to the loss of nearby forests. Roads and industries fragment ecosystems and make remaining forests more vulnerable to exploitation.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Urban_sprawl_example.jpg" alt="Urban sprawl">
-    </div>
+    Urbanization
+    <p id="cause3" class="hidden">Growing cities and infrastructure projects consume forest land, replacing 
+    natural habitats with concrete structures.</p>
   </div>
 </section>
 
 <section id="effects">
-  <h2>Effects of Deforestation</h2>
-
+  <h2>💀 Effects of Deforestation</h2>
   <div class="card" onclick="toggleInfo('effect1')">
-    <h3>Loss of Biodiversity 🐾</h3>
-    <p>Animals lose habitats and face extinction.</p>
-    <div id="effect1" class="hidden">
-      <p>About one million species risk extinction due to habitat destruction. Forests house nearly 80% of the world’s land-based biodiversity, and their loss breaks entire food chains.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Orangutan_in_Borneo.jpg" alt="Orangutan in Borneo">
-    </div>
+    Climate Change
+    <p id="effect1" class="hidden">Deforestation increases CO₂ emissions and reduces oxygen production, 
+    accelerating global warming and disturbing the Earth's climate balance.</p>
   </div>
-
   <div class="card" onclick="toggleInfo('effect2')">
-    <h3>Climate Change 🌍</h3>
-    <p>Increased CO₂ levels and unstable weather.</p>
-    <div id="effect2" class="hidden">
-      <p>Trees absorb carbon dioxide. When they’re cut, carbon is released, speeding global warming and making extreme weather events—like floods and heatwaves—more frequent.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Forest_fire_burning.jpg" alt="Forest fire">
-    </div>
+    Biodiversity Loss
+    <p id="effect2" class="hidden">Millions of species lose their homes due to deforestation, many becoming 
+    endangered or extinct.</p>
   </div>
-
   <div class="card" onclick="toggleInfo('effect3')">
-    <h3>Soil Erosion and Flooding 💧</h3>
-    <p>Trees protect soil and regulate water cycles.</p>
-    <div id="effect3" class="hidden">
-      <p>Tree roots hold the soil together. Without them, heavy rainfall washes away fertile topsoil, leading to floods, landslides, and reduced crop productivity.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Soil_erosion_in_Africa.jpg" alt="Soil erosion">
-    </div>
+    Soil Degradation
+    <p id="effect3" class="hidden">Tree roots protect the soil from erosion. Without them, land becomes barren, 
+    leading to desertification.</p>
   </div>
 </section>
 
-<section id="importance">
-  <h2>Why It Matters</h2>
-  <p>Forests are essential for clean air, water, and a stable climate. They sustain life, store carbon, and maintain ecological balance. Protecting them means protecting ourselves, our future, and every living being sharing this planet.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Rainforest_canopy_in_Costa_Rica.jpg" alt="Rainforest canopy in Costa Rica">
+<section id="why">
+  <h2>🌱 Why It Matters</h2>
+  <div class="card" onclick="toggleInfo('why1')">
+    Forests sustain life
+    <p id="why1" class="hidden">Forests provide clean air, regulate water cycles, and support countless 
+    species—including humans. Protecting them means protecting our future.</p>
+  </div>
+  <div class="card" onclick="toggleInfo('why2')">
+    Human health connection
+    <p id="why2" class="hidden">Healthy forests reduce air pollution and the spread of zoonotic diseases 
+    from wildlife to humans.</p>
+  </div>
 </section>
 
 <section id="simulation">
-  <h2>Deforestation Simulation</h2>
-  <canvas id="chart" width="600" height="300"></canvas>
-  <div id="progressContainer"><div id="progressBar"></div></div>
-  <p>Lost: <span id="hectares">0</span> ha (<span id="percent">0</span>%) | Time: <span id="time">0</span>s</p>
-  <button onclick="startSim()">Start</button>
+  <h2>📊 Deforestation Simulation</h2>
+  <p>
+    Forest lost: <span id="hectares">0</span> hectares (<span id="percent">0</span>%) <br>
+    Time: <span id="time">0</span> seconds
+  </p>
+  <div id="progressBar"></div>
+  <canvas id="chart" width="600" height="300"></canvas><br>
+  <button onclick="startSim()">Start Simulation</button>
   <button onclick="stopSim()">Stop</button>
 </section>
 
 <section id="quiz">
-  <h2>Deforestation Quiz</h2>
-  <form id="quizForm">
-    <div id="questions"></div>
-    <button type="button" onclick="checkQuiz()">Submit</button>
-  </form>
+  <h2>🧠 Quiz</h2>
+  <p>Test your knowledge about deforestation!</p>
+  <div id="quizContainer"></div>
+  <button onclick="submitQuiz()">Submit</button>
   <p id="quizResult"></p>
 </section>
 
 <section id="sources">
-  <h2>Bibliography / Sources</h2>
-  <ul>
-    <li>WWF. (2024). <i>Deforestation and Forest Degradation.</i> https://www.worldwildlife.org/threats/deforestation</li>
-    <li>NASA Earth Observatory. (2023). <i>Deforestation Overview.</i> https://earthobservatory.nasa.gov</li>
-    <li>FAO. (2022). <i>Global Forest Resources Assessment.</i> https://www.fao.org/forest-resources-assessment</li>
-    <li>National Geographic. (2023). <i>Deforestation Explained.</i> https://www.nationalgeographic.com/environment/article/deforestation</li>
-    <li>Rainforest Alliance. (2024). <i>What Causes Deforestation?</i> https://www.rainforest-alliance.org</li>
-    <li>United Nations Environment Programme. (2023). <i>Forests and Climate Change.</i></li>
-    <li>World Bank. (2023). <i>Protecting Forest Ecosystems.</i></li>
+  <h2>📚 Bibliography</h2>
+  <ul class="source-list">
+    <li>World Wildlife Fund (WWF). “Deforestation and Forest Degradation.” <a href="https://www.worldwildlife.org/threats/deforestation" target="_blank">Link</a></li>
+    <li>NASA Earth Observatory. “Deforestation.” <a href="https://earthobservatory.nasa.gov/features/Deforestation" target="_blank">Link</a></li>
+    <li>National Geographic. “Deforestation Facts.” <a href="https://www.nationalgeographic.com/environment/article/deforestation" target="_blank">Link</a></li>
+    <li>FAO (United Nations). “State of the World’s Forests.” <a href="https://www.fao.org/state-of-forests/en/" target="_blank">Link</a></li>
+    <li>Global Forest Watch. “Deforestation Data.” <a href="https://www.globalforestwatch.org/" target="_blank">Link</a></li>
   </ul>
 </section>
 
-<div class="footer">
-  <p>Made by Arraya 🌿 | Thanks Cleon for your help!</p>
+<footer>
+  <p>Made by Arraya — Thanks Cleon for your help 🌿</p>
+</footer>
+
 </div>
 
 <script>
-  // toggle info
-  function toggleInfo(id){document.getElementById(id).classList.toggle('hidden');}
+  function startSite() {
+    document.getElementById('introPage').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+  }
 
-  // simulation
-  let hectares=0, percent=0, interval, seconds=0;
-  const totalForest=4000000000;
-  const ctx=document.getElementById("chart").getContext("2d");
-  let dataPoints=[];
-  function drawChart(){
+  function toggleInfo(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('hidden');
+  }
+
+  // --- Simulation ---
+  let hectares = 0, percent = 0, interval, seconds = 0;
+  const totalForest = 4000000000;
+  const ctx = document.getElementById("chart").getContext("2d");
+  let dataPoints = [];
+
+  function drawChart() {
     ctx.clearRect(0,0,600,300);
     ctx.strokeStyle="#aaa";
     ctx.beginPath();
-    ctx.moveTo(40,10);
-    ctx.lineTo(40,280);
-    ctx.lineTo(580,280);
-    ctx.stroke();
+    ctx.moveTo(40,10); ctx.lineTo(40,280); ctx.lineTo(580,280); ctx.stroke();
     ctx.beginPath();
     ctx.moveTo(40,280);
     for(let i=0;i<dataPoints.length;i++){
       let x=40+i*(540/100);
-      let y=280-(dataPoints[i]/20);
+      let y=280-(dataPoints[i]/10); 
       if(y<10)y=10;
       ctx.lineTo(x,y);
     }
-    ctx.strokeStyle="green";ctx.lineWidth=2;ctx.stroke();
+    ctx.strokeStyle="green"; ctx.lineWidth=2; ctx.stroke();
+    ctx.fillStyle="black"; ctx.font="12px Arial";
+    ctx.fillText("Time (s) →",500,295);
+    ctx.fillText("Hectares lost ↑",5,20);
   }
-  function startSim(){if(interval)return;interval=setInterval(()=>{seconds++;hectares+=0.7;percent=((hectares/totalForest)*100).toFixed(6);document.getElementById("hectares").textContent=hectares.toFixed(1);document.getElementById("percent").textContent=percent;document.getElementById("time").textContent=seconds;document.getElementById("progressBar").style.width=percent+"%";dataPoints.push(hectares);if(dataPoints.length>100)dataPoints.shift();drawChart();},1000);}
+
+  function startSim() {
+    if(interval) return;
+    interval=setInterval(()=>{
+      seconds++;
+      hectares+=20; // bigger spike
+      percent=((hectares/totalForest)*100).toFixed(6);
+      document.getElementById("hectares").textContent=hectares.toFixed(1);
+      document.getElementById("percent").textContent=percent;
+      document.getElementById("time").textContent=seconds;
+      document.getElementById("progressBar").style.width=percent+"%";
+      dataPoints.push(hectares);
+      if(dataPoints.length>100)dataPoints.shift();
+      drawChart();
+    },1000);
+  }
   function stopSim(){clearInterval(interval);interval=null;}
 
-  // quiz
-  const quizData=[
-    {q:"What is the main cause of deforestation?",a:["Mining","Agriculture","Urban growth"],c:1},
-    {q:"Which continent experiences the most deforestation?",a:["South America","Europe","Antarctica"],c:0},
-    {q:"What gas do trees absorb?",a:["Carbon dioxide","Oxygen","Nitrogen"],c:0},
-    {q:"Which industry uses palm oil that leads to forest clearing?",a:["Food and cosmetics","Construction","Aerospace"],c:0},
-    {q:"Deforestation increases what environmental issue?",a:["Ozone recovery","Global warming","Snowfall"],c:1},
-    {q:"How much of land biodiversity lives in forests?",a:["10%","40%","80%"],c:2},
-    {q:"Which of these helps stop deforestation?",a:["Buying recycled products","Burning wood","Cutting more trees"],c:0},
-    {q:"What happens when trees are cut down?",a:["More oxygen","More carbon release","Less CO₂"],c:1},
-    {q:"Which organization works globally to stop deforestation?",a:["FIFA","WWF","NASA"],c:1},
-    {q:"What can individuals do to help?",a:["Reduce waste","Buy more paper","Ignore it"],c:0}
+  // --- Quiz ---
+  const quizQuestions=[
+    {q:"What is the main cause of tropical deforestation?",a:"Agriculture",e:"Over 70% of tropical deforestation is caused by expanding agriculture, especially palm oil and soy."},
+    {q:"Which continent loses forests the fastest?",a:"South America",e:"South America, especially the Amazon, faces the highest deforestation rates due to cattle ranching and logging."},
+    {q:"How does deforestation affect climate?",a:"Increases CO₂",e:"Trees absorb carbon dioxide. Cutting them down releases CO₂, worsening global warming."},
+    {q:"Which industry heavily contributes to forest loss?",a:"Palm oil",e:"Palm oil plantations destroy large areas of rainforest, especially in Indonesia and Malaysia."},
+    {q:"What percent of Earth's land area is forest?",a:"31%",e:"About 31% of Earth's land area is covered by forests, but that number is shrinking fast."},
+    {q:"What role do forests play in the water cycle?",a:"Regulate rainfall",e:"Forests release moisture into the atmosphere, influencing rainfall patterns."},
+    {q:"What happens to soil after deforestation?",a:"Erodes easily",e:"Without tree roots, soil erodes faster, reducing fertility and causing landslides."},
+    {q:"Which species are most at risk?",a:"Tropical wildlife",e:"Animals like orangutans, tigers, and parrots lose habitats due to forest loss."},
+    {q:"How can we help?",a:"Plant trees",e:"Reforestation and sustainable consumption help restore balance."},
+    {q:"What organization tracks global forest loss?",a:"Global Forest Watch",e:"GFW uses satellite data to monitor forest change worldwide."}
   ];
-  const qDiv=document.getElementById("questions");
-  quizData.forEach((item,i)=>{
-    const div=document.createElement("div");
-    div.className="quiz-question";
-    div.innerHTML=`<p>${i+1}. ${item.q}</p>`+item.a.map((ans,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${ans}</label><br>`).join('');
-    qDiv.appendChild(div);
+
+  const quizContainer=document.getElementById("quizContainer");
+  quizQuestions.forEach((q,i)=>{
+    let div=document.createElement("div");
+    div.innerHTML=`<p>${i+1}. ${q.q}</p>
+    <label><input type='radio' name='q${i}' value='Agriculture'> Agriculture</label><br>
+    <label><input type='radio' name='q${i}' value='Palm oil'> Palm oil</label><br>
+    <label><input type='radio' name='q${i}' value='South America'> South America</label><br>
+    <label><input type='radio' name='q${i}' value='31%'> 31%</label><br>
+    <label><input type='radio' name='q${i}' value='Erodes easily'> Erodes easily</label><br>
+    <label><input type='radio' name='q${i}' value='Plant trees'> Plant trees</label><br>
+    <label><input type='radio' name='q${i}' value='Increases CO₂'> Increases CO₂</label><br>
+    <label><input type='radio' name='q${i}' value='Tropical wildlife'> Tropical wildlife</label><br>
+    <label><input type='radio' name='q${i}' value='Global Forest Watch'> Global Forest Watch</label><br>
+    <label><input type='radio' name='q${i}' value='Regulate rainfall'> Regulate rainfall</label><br>`;
+    quizContainer.appendChild(div);
   });
-  function checkQuiz(){
-    let score=0;
-    quizData.forEach((q,i)=>{
-      const ans=document.querySelector(`input[name=q${i}]:checked`);
-      if(ans && parseInt(ans.value)===q.c) score++;
+
+  function submitQuiz(){
+    let score=0, resultText="";
+    quizQuestions.forEach((q,i)=>{
+      const selected=document.querySelector(`input[name='q${i}']:checked`);
+      if(selected){
+        if(selected.value===q.a){
+          score++;
+          resultText+=`<p>✅ Q${i+1}: Correct! ${q.e}</p>`;
+        } else {
+          resultText+=`<p>❌ Q${i+1}: Wrong. ${q.e}</p>`;
+        }
+      } else {
+        resultText+=`<p>⚠️ Q${i+1}: Not answered. ${q.e}</p>`;
+      }
     });
-    document.getElementById("quizResult").textContent=`You got ${score}/${quizData.length} correct.`;
+    document.getElementById("quizResult").innerHTML=`<b>Your score: ${score}/${quizQuestions.length}</b><br>${resultText}`;
   }
 </script>
 </body>
