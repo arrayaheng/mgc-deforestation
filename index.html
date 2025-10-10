@@ -1,268 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deforestation Awareness</title>
-<style>
-  *{box-sizing:border-box;}
-  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:0;background:#f1f8f4;color:#2d2d2d;}
-  header{background:#2e7d32;color:white;text-align:center;padding:20px 0;}
-  nav{text-align:center;background:#388e3c;padding:10px;}
-  nav a{color:white;text-decoration:none;margin:0 10px;font-weight:bold;}
-  nav a:hover{text-decoration:underline;}
-  section{padding:20px;max-width:900px;margin:auto;}
-  h1,h2,h3{text-align:center;}
-  .card{background:white;border-radius:10px;padding:15px;margin:15px 0;box-shadow:0 2px 5px rgba(0,0,0,0.2);cursor:pointer;transition:all 0.3s ease;}
-  .card:hover{transform:scale(1.02);}
-  .hidden{display:none;}
-  .footer{text-align:center;padding:15px;background:#2e7d32;color:white;margin-top:20px;}
-  button{background:#2e7d32;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;}
-  button:hover{background:#1b5e20;}
-  img{width:100%;border-radius:10px;margin:10px 0;}
-  #chart{border:1px solid #ccc;background:white;border-radius:10px;}
-  #progressContainer{width:100%;background:#ccc;height:15px;border-radius:10px;overflow:hidden;}
-  #progressBar{height:15px;width:0%;background:#2e7d32;transition:width 0.3s ease;}
-  .quiz-question{margin-bottom:20px;}
-  /* intro page */
-  #intro{position:fixed;top:0;left:0;width:100%;height:100vh;background:linear-gradient(135deg,#81c784,#388e3c);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity 1s ease;}
-  #intro h1{font-size:3em;margin-bottom:10px;}
-  #intro p{font-size:1.3em;max-width:600px;}
-  #enterBtn{margin-top:20px;padding:12px 25px;font-size:1.1em;border:none;border-radius:8px;background:white;color:#2e7d32;cursor:pointer;font-weight:bold;transition:0.3s;}
-  #enterBtn:hover{background:#f1f8f4;}
-  #main{display:none;animation:fadeIn 1s ease forwards;}
-  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MGC Deforestation Project</title>
+  <link rel="icon" type="image/png" href="https://i.imgur.com/q7HzxvI.png" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #ecfdf5;
+      color: #1b4332;
+    }
+
+    header {
+      background-color: #2d6a4f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #40916c;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+    }
+
+    footer {
+      background-color: #1b4332;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    h1, h2 {
+      color: #1b4332;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>🌳 MGC Deforestation Awareness Project</h1>
+    <p>Made by Arraya — thanks to Cleon for the help!</p>
+  </header>
 
-<!-- Intro Page -->
-<div id="intro">
-  <h1>🌲 Deforestation Awareness 🌍</h1>
-  <p>Discover the causes, effects, and urgent need to protect our forests. Learn, interact, and take a stand for nature.</p>
-  <button id="enterBtn" onclick="enterSite()">Enter Site</button>
-</div>
+  <nav>
+    <a href="#" onclick="showPage('about')">About</a>
+    <a href="#" onclick="showPage('causes')">Causes</a>
+    <a href="#" onclick="showPage('effects')">Effects</a>
+    <a href="#" onclick="showPage('quiz')">Quiz</a>
+    <a href="#" onclick="showPage('bibliography')">Bibliography</a>
+  </nav>
 
-<!-- Main Site -->
-<div id="main">
-<header>
-  <h1>Deforestation Awareness</h1>
-  <p>Understand. Act. Protect our forests.</p>
-</header>
+  <div id="about" class="content">
+    <h2>About This Project</h2>
+    <p>
+      This project raises awareness about deforestation — a critical issue affecting global ecosystems, 
+      biodiversity, and climate stability. Through this interactive site, we aim to educate visitors 
+      on the causes, consequences, and importance of protecting forests.
+    </p>
+    <p>
+      Forests are the lungs of our planet. They store carbon, regulate temperature, and provide habitats 
+      for millions of species. By understanding deforestation and its impacts, we can take steps to build 
+      a more sustainable and greener future.
+    </p>
+  </div>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#purpose">Purpose</a>
-  <a href="#causes">Causes</a>
-  <a href="#effects">Effects</a>
-  <a href="#importance">Why It Matters</a>
-  <a href="#simulation">Simulation</a>
-  <a href="#quiz">Quiz</a>
-  <a href="#sources">Sources</a>
-</nav>
+  <div id="causes" class="content hidden">
+    <h2>🔥 Causes of Deforestation</h2>
 
-<section id="about">
-  <h2>About This Project</h2>
-  <p>This website raises awareness about deforestation—one of the greatest environmental challenges facing our planet. It combines educational content, interactive simulations, and quizzes to help users understand the causes and consequences of forest destruction, and how we can prevent it together.</p>
-  <p><b>Created by:</b> Arraya<br><b>Special thanks:</b> Cleon for helping with design ideas, research, and layout refinement.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Rainforest_in_Borneo.jpg" alt="Rainforest in Borneo">
-</section>
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Logging Industry</strong>
+      <p class="info hidden">
+        Logging for timber and paper products removes vast forest areas. Unsustainable practices 
+        destroy natural habitats and reduce biodiversity. In many tropical regions, illegal logging 
+        continues to thrive due to weak regulations. Long-term effects include soil erosion, flooding, 
+        and loss of carbon storage. Replanting efforts rarely replace the diversity of lost old-growth trees.
+      </p>
+    </div>
 
-<section id="purpose">
-  <h2>Purpose</h2>
-  <p>The purpose of this site is to educate and motivate people to take part in protecting forests. Deforestation affects climate, biodiversity, and even human livelihoods. By sharing knowledge and encouraging sustainable practices, we can all help reduce forest loss and support reforestation.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Forest_canopy_during_sunset.jpg" alt="Forest canopy at sunset">
-</section>
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Agricultural Expansion</strong>
+      <p class="info hidden">
+        Forests are cleared for crops like soy, coffee, and palm oil, as well as for cattle ranching. 
+        Over 70% of tropical deforestation is linked to agricultural expansion. The loss of forest 
+        cover contributes to global warming and endangers native species. Sustainable farming and 
+        consumer awareness are vital to reducing this impact.
+      </p>
+    </div>
 
-<section id="causes">
-  <h2>🔥 Causes of Deforestation</h2>
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Urbanization</strong>
+      <p class="info hidden">
+        Expanding cities require land for housing, roads, and industries, often replacing natural 
+        forests. Urbanization fragments habitats and reduces green spaces. As populations grow, 
+        sustainable planning becomes crucial to preserve ecosystems.
+      </p>
+    </div>
 
-  <div class="card" onclick="toggleInfo('cause1')">
-    <h3>Logging Industry 🪵</h3>
-    <p>Logging for timber and paper products removes massive forest areas.</p>
-    <div id="cause1" class="hidden">
-      <p>Unsustainable and illegal logging is one of the primary drivers of deforestation. It leads to the destruction of natural habitats, threatening species that rely on forest cover. Often, logging occurs without replanting or proper forest management, making it impossible for ecosystems to recover.</p>
-      <p>Beyond environmental impacts, illegal logging also causes economic losses for countries due to unreported exports. Local communities depending on forests for resources like food and medicine also suffer when trees are destroyed.</p>
-      <p>Global efforts like the Forest Stewardship Council (FSC) certification promote sustainable forestry practices to ensure forests are harvested responsibly.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Logging_operations.jpg" alt="Logging operations">
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Mining Activities</strong>
+      <p class="info hidden">
+        Mining for resources like gold, coal, and rare metals causes severe deforestation. It destroys 
+        ecosystems, contaminates rivers with toxic waste, and displaces local communities. Rehabilitation 
+        projects are expensive and take decades to recover even a fraction of the lost biodiversity.
+      </p>
     </div>
   </div>
 
-  <div class="card" onclick="toggleInfo('cause2')">
-    <h3>Agricultural Expansion 🌾</h3>
-    <p>Forests are cleared for crops and livestock, especially palm oil and soy.</p>
-    <div id="cause2" class="hidden">
-      <p>Agriculture accounts for nearly 80% of tropical deforestation. Large-scale farming for soybeans, palm oil, and cattle ranching transforms entire rainforests into farmland. The demand for these products continues to rise globally, putting immense pressure on remaining forest areas.</p>
-      <p>This expansion not only removes trees but also disrupts soil health and water systems, leading to erosion and reduced fertility. Burning forests to clear land releases carbon dioxide, worsening climate change.</p>
-      <p>Solutions include supporting sustainable farming practices, reducing food waste, and consuming plant-based alternatives that require fewer resources.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Amazon_Deforestation.jpg" alt="Amazon deforestation">
+  <div id="effects" class="content hidden">
+    <h2>🌍 Effects of Deforestation</h2>
+
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Loss of Biodiversity</strong>
+      <p class="info hidden">
+        Forests host more than 80% of the world’s terrestrial species. When trees are destroyed, 
+        countless animals and plants lose their homes. This causes imbalances in the ecosystem 
+        and pushes many species toward extinction.
+      </p>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Climate Change</strong>
+      <p class="info hidden">
+        Trees absorb carbon dioxide. Cutting them down releases stored carbon back into the atmosphere, 
+        accelerating global warming. Deforestation contributes to about 10% of total greenhouse gas emissions.
+      </p>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Disruption of Water Cycles</strong>
+      <p class="info hidden">
+        Forests regulate rainfall and maintain soil moisture. Without them, droughts and floods become 
+        more frequent. This harms agriculture, freshwater supplies, and human settlements.
+      </p>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this)">
+      <strong>Economic Impact</strong>
+      <p class="info hidden">
+        Deforestation initially boosts economies through logging and agriculture, but long-term damage 
+        to ecosystems leads to loss of natural resources, reduced soil fertility, and declining water quality. 
+        The cost of environmental restoration often outweighs short-term gains.
+      </p>
     </div>
   </div>
 
-  <div class="card" onclick="toggleInfo('cause3')">
-    <h3>Urbanization and Infrastructure 🏙️</h3>
-    <p>Expanding cities and roads destroy natural habitats.</p>
-    <div id="cause3" class="hidden">
-      <p>Urban growth leads to massive forest clearing for housing, roads, and industry. Developing nations often expand into forested areas to accommodate rising populations, destroying natural habitats in the process.</p>
-      <p>Road construction fragments ecosystems, isolating animal populations and preventing migration. This disrupts biodiversity and increases the risk of extinction for many species.</p>
-      <p>Implementing green urban planning and environmental laws can reduce deforestation caused by expansion while ensuring balanced development.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Urban_sprawl_example.jpg" alt="Urban sprawl">
-    </div>
-  </div>
-</section>
-
-<section id="effects">
-  <h2>🌍 Effects of Deforestation</h2>
-
-  <div class="card" onclick="toggleInfo('effect1')">
-    <h3>Loss of Biodiversity 🐾</h3>
-    <p>Forests are home to 80% of land species.</p>
-    <div id="effect1" class="hidden">
-      <p>Deforestation destroys the habitats of countless species. When forests disappear, animals lose shelter, food, and breeding grounds. Orangutans, jaguars, and tropical birds are among the many species driven toward extinction.</p>
-      <p>The loss of biodiversity weakens ecosystem resilience, making nature less capable of recovering from natural disasters or climate shifts. Humans also lose potential sources for new medicines derived from forest plants.</p>
-      <p>Protecting biodiversity means protecting our own survival, as healthy ecosystems ensure clean air, water, and food for all living beings.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Orangutan_in_Borneo.jpg" alt="Orangutan in Borneo">
-    </div>
+  <div id="quiz" class="content hidden">
+    <h2>🧠 Quick Quiz</h2>
+    <p>Test your knowledge about deforestation!</p>
+    <ol>
+      <li>What percentage of tropical deforestation is linked to agriculture?</li>
+      <li>How does deforestation affect global temperatures?</li>
+      <li>What can individuals do to reduce deforestation?</li>
+      <li>Why is biodiversity important for human survival?</li>
+      <li>How can reforestation help reverse climate change?</li>
+    </ol>
   </div>
 
-  <div class="card" onclick="toggleInfo('effect2')">
-    <h3>Climate Change 🌡️</h3>
-    <p>Trees absorb CO₂—cutting them increases emissions.</p>
-    <div id="effect2" class="hidden">
-      <p>Trees store carbon dioxide. When they’re cut down or burned, this carbon is released, intensifying global warming. Deforestation contributes nearly 10% of human-caused greenhouse gas emissions globally.</p>
-      <p>Forests also regulate rainfall and temperature. Their removal leads to hotter and drier climates, reducing agricultural productivity and threatening food security.</p>
-      <p>Restoring forests through reforestation and halting illegal logging are key steps to slowing climate change.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Forest_fire_burning.jpg" alt="Forest fire">
-    </div>
+  <div id="bibliography" class="content hidden">
+    <h2>📚 Bibliography / Sources</h2>
+    <ul>
+      <li>World Wildlife Fund (WWF). <i>Deforestation and Forest Degradation</i>. <a href="https://www.worldwildlife.org/threats/deforestation" target="_blank">Link</a></li>
+      <li>National Geographic. <i>Deforestation Explained</i>. <a href="https://www.nationalgeographic.com/environment/article/deforestation" target="_blank">Link</a></li>
+      <li>United Nations Environment Programme (UNEP). <i>Forests and Climate Change</i>. <a href="https://www.unep.org/" target="_blank">Link</a></li>
+      <li>Rainforest Alliance. <i>Why Forests Matter</i>. <a href="https://www.rainforest-alliance.org/" target="_blank">Link</a></li>
+      <li>NASA Earth Observatory. <i>Deforestation Trends</i>. <a href="https://earthobservatory.nasa.gov/" target="_blank">Link</a></li>
+    </ul>
   </div>
 
-  <div class="card" onclick="toggleInfo('effect3')">
-    <h3>Soil Erosion & Flooding 💧</h3>
-    <p>Tree roots protect soil and regulate water.</p>
-    <div id="effect3" class="hidden">
-      <p>Tree roots hold soil in place and absorb excess water. When trees are gone, heavy rain washes away fertile soil, leading to erosion and floods. This process makes the land less productive and increases disaster risks for nearby communities.</p>
-      <p>In mountainous regions, landslides become more common due to deforestation, threatening lives and property. Flooding can also contaminate drinking water sources, creating health crises.</p>
-      <p>Planting trees and maintaining forest buffers along rivers help stabilize soil and prevent erosion.</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Soil_erosion_in_Africa.jpg" alt="Soil erosion">
-    </div>
-  </div>
-</section>
+  <footer>
+    <p>© 2025 MGC Deforestation Project | Made by Arraya | Thanks Cleon 🌱</p>
+  </footer>
 
-<section id="importance">
-  <h2>🌿 Why It Matters</h2>
-  <p>Forests support life on Earth. They regulate the climate, purify air, and provide food, medicine, and shelter. Without forests, we risk losing not only biodiversity but also our planet’s stability. Taking small actions—like planting trees, using recycled paper, or supporting eco-friendly brands—makes a big difference.</p>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Rainforest_canopy_in_Costa_Rica.jpg" alt="Rainforest canopy in Costa Rica">
-</section>
-
-<section id="simulation">
-  <h2>📉 Deforestation Simulation</h2>
-  <canvas id="chart" width="600" height="300"></canvas>
-  <div id="progressContainer"><div id="progressBar"></div></div>
-  <p>Lost: <span id="hectares">0</span> ha (<span id="percent">0</span>%) | Time: <span id="time">0</span>s</p>
-  <button onclick="startSim()">Start</button>
-  <button onclick="stopSim()">Stop</button>
-</section>
-
-<section id="quiz">
-  <h2>🧠 Quiz: Test Your Knowledge</h2>
-  <div id="quizContainer"></div>
-  <button onclick="checkQuiz()">Submit Answers</button>
-  <p id="quizResult"></p>
-</section>
-
-<section id="sources">
-  <h2>📚 Bibliography & Sources</h2>
-  <ul>
-    <li>World Wildlife Fund (WWF) – Deforestation Facts</li>
-    <li>NASA Earth Observatory – “Deforestation Explained”</li>
-    <li>United Nations FAO – Global Forest Resources Assessment</li>
-    <li>National Geographic – “The Devastating Effects of Deforestation”</li>
-    <li>Rainforest Alliance – “Sustainable Forestry and Agriculture”</li>
-  </ul>
-</section>
-
-<div class="footer">
-  <p>Made by Arraya 🌿 | Thanks Cleon for your help</p>
-</div>
-</div>
-
-<script>
-function enterSite(){
-  document.getElementById("intro").style.opacity="0";
-  setTimeout(()=>{document.getElementById("intro").style.display="none";document.getElementById("main").style.display="block";},1000);
-}
-
-function toggleInfo(id){
-  const elem=document.getElementById(id);
-  elem.classList.toggle("hidden");
-}
-
-// --- Simulation ---
-let running=false,time=0,hectares=0;
-function startSim(){
-  if(running)return;
-  running=true;
-  const ctx=document.getElementById('chart').getContext('2d');
-  let data=[];
-  let interval=setInterval(()=>{
-    if(!running){clearInterval(interval);return;}
-    time++;
-    hectares+=Math.random()*400+300; // faster increase
-    let percent=Math.min((hectares/100000)*100,100);
-    document.getElementById("time").innerText=time;
-    document.getElementById("hectares").innerText=hectares.toFixed(0);
-    document.getElementById("percent").innerText=percent.toFixed(1);
-    document.getElementById("progressBar").style.width=percent+"%";
-    data.push(hectares);
-    if(data.length>60)data.shift();
-    ctx.clearRect(0,0,600,300);
-    ctx.beginPath();
-    ctx.moveTo(0,300-data[0]/400);
-    for(let i=1;i<data.length;i++){
-      ctx.lineTo(i*10,300-data[i]/400);
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.content').forEach(page => page.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
     }
-    ctx.strokeStyle="#2e7d32";
-    ctx.lineWidth=3;
-    ctx.stroke();
-  },700);
-}
-function stopSim(){running=false;}
 
-// --- Quiz ---
-const quiz=[
-  {q:"What is the biggest cause of tropical deforestation?",a:"Agriculture"},
-  {q:"How much of land biodiversity lives in forests?",a:"80%"},
-  {q:"What gas do trees absorb to help climate?",a:"CO2"},
-  {q:"What organization certifies sustainable forestry?",a:"FSC"},
-  {q:"What happens to soil when trees are cut?",a:"Erosion"},
-  {q:"Which continent loses the most rainforest?",a:"South America"},
-  {q:"What human activity increases forest fires?",a:"Burning for farming"},
-  {q:"What does deforestation do to rainfall?",a:"Reduces it"},
-  {q:"What can you do to help forests?",a:"Plant trees"},
-  {q:"Why are forests called Earth’s lungs?",a:"They produce oxygen"}
-];
-const container=document.getElementById("quizContainer");
-quiz.forEach((q,i)=>{
-  container.innerHTML+=`<div class="quiz-question">
-    <p><b>${i+1}. ${q.q}</b></p>
-    <input id="ans${i}" placeholder="Your answer...">
-  </div>`;
-});
-function checkQuiz(){
-  let score=0;
-  quiz.forEach((q,i)=>{
-    const ans=document.getElementById("ans"+i).value.trim().toLowerCase();
-    const correct=q.a.toLowerCase();
-    if(ans===correct){score++;}
-  });
-  let result="You got "+score+" out of "+quiz.length+" correct.<br>";
-  quiz.forEach((q,i)=>{
-    const ans=document.getElementById("ans"+i).value.trim();
-    result+=`${i+1}. ${q.q} — <b>${ans || "(no answer)"}</b> → Correct: <b>${q.a}</b><br>`;
-  });
-  document.getElementById("quizResult").innerHTML=result;
-}
-</script>
-
+    function toggleInfo(card) {
+      const info = card.querySelector('.info');
+      info.classList.toggle('hidden');
+    }
+  </script>
 </body>
 </html>
