@@ -1,261 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Deforestation Awareness 🌳</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/427/427735.png" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deforestation Awareness — MGC Project</title>
+  <link rel="icon" href="https://i.imgur.com/q7HzxvI.png" />
+  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background-color: #e8f5e9;
-      color: #1b4332;
-      margin: 0;
+    /* ----------------- Basic layout & theme ----------------- */
+    :root{
+      --green-700:#2e7d32;
+      --green-600:#43a047;
+      --green-50:#f1f8e9;
+      --accent:#1b4332;
     }
-    header {
-      background-color: #2e7d32;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #ecfdf5;
+      color: var(--accent);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    nav button {
-      background: #4caf50;
-      border: none;
-      color: white;
-      margin: 0 4px;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
+
+    /* ------------ Landing / intro ------------- */
+    #landing{
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:28px;
+      background: linear-gradient(135deg, rgba(46,125,50,0.92), rgba(129,199,132,0.72)),
+                  url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+      color: #fff;
+      gap:18px;
+      flex-direction:column;
     }
-    nav button:hover {
-      background: #66bb6a;
+    #landing h1{font-size:3rem;margin:0 0 8px}
+    #landing p{max-width:760px;margin:0 auto 18px;font-size:1.15rem;line-height:1.5}
+    .start-btn{
+      background:var(--green-700);
+      border:0;color:#fff;padding:14px 26px;border-radius:10px;font-weight:700;
+      cursor:pointer;font-size:1.05rem;box-shadow:0 8px 24px rgba(16,84,32,0.18);
+      transition:transform .18s, background .18s;
     }
-    section {
-      display: none;
-      padding: 2rem;
-      max-width: 900px;
-      margin: 20px auto;
-      background: #f1f8e9;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    .start-btn:hover{transform:translateY(-3px);background: #1b5e20}
+
+    /* -------------- Header & nav --------------- */
+    header{
+      display:flex;align-items:center;justify-content:space-between;padding:18px 26px;background:var(--green-700);color:#fff;
+      position:sticky;top:0;z-index:40;box-shadow:0 2px 8px rgba(0,0,0,0.06)
     }
-    section.active { display: block; }
-    .accordion {
-      background: #c8e6c9;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      padding: 10px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    header .brand{display:flex;align-items:center;gap:14px}
+    header img.logo{width:48px;height:48px;border-radius:8px;object-fit:cover}
+    header h1{font-size:1.15rem;margin:0}
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{color:#fff;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:700;cursor:pointer}
+    nav a:hover{background:rgba(255,255,255,0.06)}
+
+    /* --------------- Page container ------------- */
+    .container{max-width:1100px;margin:28px auto;padding:0 18px}
+    section.content{
+      background:var(--green-50);padding:28px;border-radius:14px;margin-bottom:20px;
+      box-shadow:0 8px 30px rgba(10,20,12,0.04);
     }
-    .accordion img {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
-      object-fit: cover;
+    h2{color:var(--green-700);margin-top:0}
+
+    /* ------------- Accordion (cards) ------------ */
+    .card{
+      display:flex;gap:16px;align-items:flex-start;padding:14px;border-radius:12px;background:#fff;margin:12px 0;cursor:pointer;
+      box-shadow:0 6px 18px rgba(10,20,12,0.05);
     }
-    .panel {
-      display: none;
-      padding: 10px 20px;
-      background: #e9f7ef;
-      border-radius: 0 0 10px 10px;
-    }
-    .accordion.active + .panel {
-      display: block;
-    }
-    .quiz-option {
-      background: #c8e6c9;
-      padding: 10px;
-      border-radius: 8px;
-      margin: 5px 0;
-      cursor: pointer;
-    }
-    .quiz-option.correct { background: #a5d6a7; }
-    .quiz-option.wrong { background: #ef9a9a; }
-    footer {
-      text-align: center;
-      background: #2e7d32;
-      color: white;
-      padding: 1rem;
-      margin-top: 20px;
+    .card:hover{transform:translateY(-4px);transition:transform .12s}
+    .thumb{width:120px;height:80px;border-radius:10px;object-fit:cover;flex-shrink:0}
+    .card .meta{flex:1}
+    .card .meta h3{margin:0 0 6px;font-size:1.05rem;color:var(--accent)}
+    .card .meta p.lead{margin:0;color:#2f6f49}
+    .card .detail{margin-top:10px;color:#354b3e;line-height:1.55;display:none}
+    .card.expanded .detail{display:block}
+
+    /* ------------- Simulation layout ------------- */
+    .sim-row{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+    #chartBox{flex:1;min-width:300px;background:#fff;padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+    #controls{min-width:260px;background:#fff;padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+    .forest-visual{width:100%;height:140px;border-radius:10px;border:1px solid #dff3e1;background:linear-gradient(#e8f5e9,#f7fff7);position:relative;overflow:hidden;padding:8px}
+
+    .tree{position:absolute;bottom:8px;width:30px;height:68px;background:var(--accent);border-radius:0 0 8px 8px}
+    .tree::before{content:"";position:absolute;left:-15px;top:-40px;width:60px;height:52px;background:#2e7d32;border-radius:50%}
+
+    /* --------- Quiz styles --------- */
+    .quiz-q{background:#fff;padding:14px;border-radius:12px;margin:12px 0;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+    .opt{display:block;padding:10px;border-radius:8px;margin:6px 0;background:#dff0e3;cursor:pointer}
+    .opt.correct{background:#c8f0d0;border:2px solid #66bb6a}
+    .opt.wrong{background:#ffdfe0;border:2px solid #e57373}
+    .explain{margin-top:8px;color:#234d35;background:#f1fff4;padding:10px;border-radius:8px}
+
+    /* ------------- Sources/Footer --------------- */
+    .sources ul{padding-left:18px}
+    footer{background:var(--green-700);color:#fff;padding:16px;text-align:center;border-top-left-radius:6px;border-top-right-radius:6px}
+    .muted{color:#556b56;font-size:0.95rem}
+
+    /* responsive */
+    @media (max-width:880px){
+      .card{flex-direction:column}
+      .thumb{width:100%;height:160px}
+      .sim-row{flex-direction:column}
+      #controls{width:100%}
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>🌲 Deforestation Awareness</h1>
-    <nav>
-      <button onclick="show('causes')">Causes</button>
-      <button onclick="show('effects')">Effects</button>
-      <button onclick="show('solutions')">Solutions</button>
-      <button onclick="show('simulation')">Simulation</button>
-      <button onclick="show('quiz')">Quiz</button>
+  <!-- LANDING -->
+  <div id="landing">
+    <h1>🌿 Deforestation Awareness — MGC Project</h1>
+    <p>Learn what drives deforestation, how it affects people and nature, and simple things we all can do to help. Interactive simulation and a ten-question quiz are included — jump right in.</p>
+    <button class="start-btn" id="startBtn">Start Learning</button>
+    <p class="muted" style="max-width:760px">Made by Arraya • Thanks to Cleon for help and research guidance</p>
+  </div>
+
+  <!-- MAIN HEADER (hidden until start) -->
+  <header id="mainHeader" style="display:none">
+    <div class="brand">
+      <img class="logo" src="https://i.imgur.com/q7HzxvI.png" alt="logo">
+      <h1>MGC Deforestation Awareness</h1>
+    </div>
+    <nav aria-label="Main navigation">
+      <a onclick="showSection('purpose')">Purpose</a>
+      <a onclick="showSection('causes')">Causes</a>
+      <a onclick="showSection('effects')">Effects</a>
+      <a onclick="showSection('solutions')">Solutions</a>
+      <a onclick="showSection('simulation')">Simulation</a>
+      <a onclick="showSection('quiz')">Quiz</a>
+      <a onclick="showSection('sources')">Sources</a>
     </nav>
   </header>
 
-  <!-- Causes -->
-  <section id="causes" class="active">
-    <h2>🌍 Causes of Deforestation</h2>
+  <!-- PAGES -->
+  <main class="container" id="mainContent" style="display:none">
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Cattle_ranching_Brazil.jpg"><b>Agricultural Expansion:</b> Clearing forests for farms and livestock.</div>
-    <div class="panel">Farmers cut down trees to make space for crops or cattle. While it boosts food production, it destroys biodiversity and can permanently change the landscape.</div>
+    <!-- PURPOSE -->
+    <section id="purpose" class="content">
+      <h2>Purpose</h2>
+      <p>This site was created to explain, in plain language, how and why forests are being lost — and what we can do about it. It mixes clear, science-backed facts with interactive tools (a simulation and a quiz) so you can both learn and test your understanding.</p>
+      <p>Forests support people, store carbon, and keep the planet healthy. The pages below explain causes, impacts, and practical solutions — plus sources so you can read more.</p>
+    </section>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Logging_operations_in_the_Tanami_Desert.jpg"><b>Logging:</b> Cutting trees for timber and paper.</div>
-    <div class="panel">Logging — legal or illegal — reduces forest cover and destroys animal habitats. It also makes the soil vulnerable to erosion.</div>
+    <!-- CAUSES -->
+    <section id="causes" class="content">
+      <h2>Causes of Deforestation</h2>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Urban_expansion.jpg"><b>Urban Growth:</b> Expanding cities take over forest areas.</div>
-    <div class="panel">As cities expand, they replace natural forests with roads and buildings, fragmenting habitats and reducing wildlife populations.</div>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Cattle_ranching_Brazil.jpg" alt="Agricultural expansion">
+        <div class="meta">
+          <h3>Agricultural expansion</h3>
+          <p class="lead">Clearing forests to make room for crops and livestock.</p>
+          <div class="detail">
+            <p>Expanding farms and pasture is the single largest cause of forest loss in many regions. Large plantations (for palm oil, soy, or cattle) often replace entire forest ecosystems. Farmers and companies sometimes burn forest to clear land quickly — that releases carbon and destroys habitats. The result is permanent changes to the soil, local climate, and wildlife populations.</p>
+            <p>Solutions include better land-use planning, supporting small farmers with sustainable techniques, and reducing demand for products linked to large-scale clearing.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Open-pit_mining.jpg"><b>Mining:</b> Extracting minerals clears vast forest areas.</div>
-    <div class="panel">Mining operations strip vegetation and pollute nearby rivers and soil with chemicals, leaving long-term damage.</div>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/4/45/Logging_operations_in_the_Tanami_Desert.jpg" alt="Logging">
+        <div class="meta">
+          <h3>Logging and timber production</h3>
+          <p class="lead">Harvesting trees for wood, paper, and fuel.</p>
+          <div class="detail">
+            <p>Logging removes key trees — sometimes selectively, other times clear-cut — leaving the forest fragmented and weakened. Illegal logging is a serious issue where enforcement is weak. Once the biggest, oldest trees are gone, the forest's ability to store carbon and support wildlife drops dramatically.</p>
+            <p>Promoting certified timber, enforcing logging laws, and investing in alternatives to wood-based fuels help lower pressure on forests.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Wildfire_in_forest.jpg"><b>Wildfires:</b> Natural or human-caused fires destroy forests.</div>
-    <div class="panel">Large fires can wipe out forests within days, releasing carbon and harming air quality for miles.</div>
-  </section>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Open-pit_mining.jpg" alt="Mining">
+        <div class="meta">
+          <h3>Mining and resource extraction</h3>
+          <p class="lead">Mines clear vegetation and pollute land and water.</p>
+          <div class="detail">
+            <p>Mining needs access — roads, camps, and processing — which slices into forests. Heavy machinery removes soil and vegetation, and sometimes toxic waste contaminates rivers and groundwater. The footprint can last decades, and reclaiming the land is costly and slow.</p>
+            <p>Tighter rules, better mine rehabilitation, and avoiding high-value biodiversity zones can reduce the impact.</p>
+          </div>
+        </div>
+      </div>
 
-  <!-- Effects -->
-  <section id="effects">
-    <h2>🔥 Effects of Deforestation</h2>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/4/42/Urban_expansion.jpg" alt="Urbanisation">
+        <div class="meta">
+          <h3>Urbanization & infrastructure</h3>
+          <p class="lead">Cities, roads and dams push into forested lands.</p>
+          <div class="detail">
+            <p>Growing towns and new roads open access to remote forests. Infrastructure projects fragment habitats and often accelerate other drivers — once a road is built, farmers and loggers can move in. Dams and reservoirs flood valleys and change river flows, displacing both people and wildlife.</p>
+            <p>Integrated planning and corridors that preserve connectivity are essential to reduce these effects.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Deforestation_biodiversity_loss.jpg"><b>Loss of Biodiversity:</b> Forests are home to 80% of land animals.</div>
-    <div class="panel">When forests vanish, thousands of species lose shelter and food, leading to extinction and fragile ecosystems.</div>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Wildfire_in_forest.jpg" alt="Wildfires">
+        <div class="meta">
+          <h3>Fires — human-caused and natural</h3>
+          <p class="lead">Burning for land or wildfires driven by drought and heat.</p>
+          <div class="detail">
+            <p>Fire can be used deliberately to clear land. With hotter, drier weather from climate change, fires spread more easily and become harder to control. Repeated burning can prevent forests from regrowing and convert them into degraded scrubland.</p>
+            <p>Fire management, reduced clearing, and climate action all reduce wildfire risk.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Climate_change_effects.jpg"><b>Climate Change:</b> Trees absorb CO₂ — fewer trees, more warming.</div>
-    <div class="panel">Deforestation adds carbon dioxide to the air, trapping heat and driving global warming and erratic weather.</div>
+    <!-- EFFECTS -->
+    <section id="effects" class="content" style="display:none">
+      <h2>Effects of Deforestation</h2>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Soil_erosion.jpg"><b>Soil Erosion:</b> Without trees, soil easily washes away.</div>
-    <div class="panel">Tree roots anchor soil. Without them, heavy rains wash nutrients away, leaving infertile land behind.</div>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Deforestation_biodiversity_loss.jpg" alt="Biodiversity loss">
+        <div class="meta">
+          <h3>Loss of biodiversity</h3>
+          <p class="lead">Species lose homes and food sources — many cannot survive elsewhere.</p>
+          <div class="detail">
+            <p>Forests support the majority of terrestrial species. As habitat shrinks, specialist species (those with narrow ranges or diets) face extinction. This reduces ecosystem resilience — fewer pollinators, predators, and other species means fewer natural services for people, like crop pollination or pest control.</p>
+            <p>Protecting intact habitats and connecting fragmented areas helps species survive and adapt.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Water_cycle.jpg"><b>Water Cycle Disruption:</b> Forests help maintain rainfall.</div>
-    <div class="panel">Forests release moisture into the air. When they’re gone, rainfall drops, causing droughts and affecting crops.</div>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Climate_change_effects.jpg" alt="Climate change">
+        <div class="meta">
+          <h3>Climate change amplification</h3>
+          <p class="lead">Cutting trees releases stored carbon and weakens the land’s carbon balance.</p>
+          <div class="detail">
+            <p>Trees store carbon in their trunks, roots and soil. When forests are burned or cleared, CO₂ is released into the atmosphere, accelerating global warming. Forest loss also affects local climate — less shade and moisture can make places hotter and drier.</p>
+            <p>Protecting forests is one of the most cost-effective ways to keep carbon out of the atmosphere while preserving biodiversity.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Forest_economy.jpg"><b>Economic Impact:</b> Forest-dependent people lose livelihoods.</div>
-    <div class="panel">Communities relying on wood, fruits, or tourism face hardship when forests disappear.</div>
-  </section>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Soil_erosion.jpg" alt="Soil erosion">
+        <div class="meta">
+          <h3>Soil erosion and degraded land</h3>
+          <p class="lead">Without roots to hold it, topsoil washes away and farmland becomes less productive.</p>
+          <div class="detail">
+            <p>Topsoil holds the nutrients plants need. When heavy rains hit bare land, valuable soil gets carried away into rivers and out to sea, causing siltation and damaging fisheries downstream. Over time, agriculture can become impossible on badly eroded land.</p>
+            <p>Agroforestry and replanting are ways to restore soils and stabilize landscapes.</p>
+          </div>
+        </div>
+      </div>
 
-  <!-- Solutions -->
-  <section id="solutions">
-    <h2>🌱 Solutions to Deforestation</h2>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Water_cycle.jpg" alt="Water cycle">
+        <div class="meta">
+          <h3>Water cycle disruption</h3>
+          <p class="lead">Forests recycle moisture; losing them changes rainfall patterns.</p>
+          <div class="detail">
+            <p>Trees transpire water that helps form clouds and sustain rains. Large-scale clearing can reduce regional rainfall, increasing drought risk and making water supply less reliable for farming and people in downstream areas.</p>
+            <p>Keeping forest cover in headwater regions helps secure water for people and nature alike.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Reforestation_tree_planting.jpg"><b>Reforestation:</b> Planting trees restores balance.</div>
-    <div class="panel">Replanting trees helps rebuild ecosystems, improve air quality, and store carbon dioxide again.</div>
+    <!-- SOLUTIONS -->
+    <section id="solutions" class="content" style="display:none">
+      <h2>Solutions & What Works</h2>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Agroforestry.jpg"><b>Sustainable Farming:</b> Using eco-friendly agricultural practices.</div>
-    <div class="panel">Crop rotation and agroforestry reduce the need for land clearing, protecting natural forests.</div>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Reforestation_tree_planting.jpg" alt="Reforestation">
+        <div class="meta">
+          <h3>Reforestation & restoration</h3>
+          <p class="lead">Planting native trees and restoring rivers and soils.</p>
+          <div class="detail">
+            <p>Well-planned tree planting rebuilds habitats and stores carbon. Restoration focuses on native species and rebuilding ecosystem functions — that’s more effective than simply planting a single fast-growing species. Community-led restoration often succeeds because locals care for the plants and benefit from them.</p>
+            <p>Large-scale initiatives (like the Bonn Challenge) combine planting with protecting remaining forest and restoring degraded landscapes.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Protected_area_forest.jpg"><b>Protected Areas:</b> Creating reserves to preserve forests.</div>
-    <div class="panel">Governments can set aside conservation zones that prevent illegal logging and mining.</div>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/1/15/Agroforestry.jpg" alt="Sustainable farming">
+        <div class="meta">
+          <h3>Sustainable agriculture</h3>
+          <p class="lead">Farming methods that keep trees and soil healthy.</p>
+          <div class="detail">
+            <p>Agroforestry mixes trees with crops and livestock, keeping soil fertile and allowing farmers to earn while protecting tree cover. Practices like crop rotation, cover crops, and reduced chemical use make farmland more resilient and reduce pressure to clear new forest.</p>
+            <p>Supporting local farmers with training and markets for sustainable products is essential.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Eco_product_label.jpg"><b>Eco-Friendly Products:</b> Buy certified sustainable goods.</div>
-    <div class="panel">Choosing products with eco-labels (like FSC wood) discourages illegal deforestation and waste.</div>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/3/31/Protected_area_forest.jpg" alt="Protected areas">
+        <div class="meta">
+          <h3>Protected areas & land rights</h3>
+          <p class="lead">Parks, reserves, and secure land rights for Indigenous communities.</p>
+          <div class="detail">
+            <p>Where Indigenous people or local communities have secure rights, deforestation rates tend to be lower. Protected areas stop large-scale clearing and give nature space to recover. Strong policy, monitoring, and enforcement are needed to ensure protection is effective.</p>
+            <p>Combining protected areas with sustainable use zones balances conservation and human needs.</p>
+          </div>
+        </div>
+      </div>
 
-    <div class="accordion"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Education_forest.jpg"><b>Education & Awareness:</b> Teaching communities to protect forests.</div>
-    <div class="panel">Awareness campaigns and education help people understand the value of forests and how to conserve them.</div>
-  </section>
+      <div class="card" role="button" tabindex="0" onclick="toggleCard(this)">
+        <img class="thumb" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Eco_product_label.jpg" alt="Consumer choices">
+        <div class="meta">
+          <h3>Consumer choices and markets</h3>
+          <p class="lead">Buying certified products and reducing waste reduce demand for clearing.</p>
+          <div class="detail">
+            <p>Labels like FSC (forest products) or RSPO (palm oil) help consumers choose goods that don't drive deforestation. Reducing food waste and eating less resource-intensive meat also lower land pressure.</p>
+            <p>Market demand shapes what farmers grow — so consumer choices matter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Simulation -->
-  <section id="simulation">
-    <h2>📊 Deforestation Simulation</h2>
-    <label>Deforestation Rate (% per year): </label>
-    <input type="range" id="rate" min="1" max="10" value="4" oninput="updateSim()">
-    <p>Current Rate: <span id="rateVal">4%</span></p>
-    <canvas id="forestChart"></canvas>
-  </section>
+    <!-- SIMULATION -->
+    <section id="simulation" class="content" style="display:none">
+      <h2>Interactive simulation — forest area over 20 years</h2>
+      <p>Use the slider to change the annual deforestation rate (this is accelerated for visualization). The chart shows forest area (as an index starting at 100).</p>
 
-  <!-- Quiz -->
-  <section id="quiz">
-    <h2>🧠 Quick Forest Quiz</h2>
-    <div id="quiz-container"></div>
-    <button onclick="submitQuiz()">Submit</button>
-    <p id="quiz-result"></p>
-  </section>
+      <div class="sim-row">
+        <div id="chartBox">
+          <canvas id="forestChart" width="600" height="320"></canvas>
+        </div>
 
-  <footer>Made by Arraya 🌿 | Stay green 🌲</footer>
+        <div id="controls">
+          <div class="forest-visual" id="forestVisual" aria-hidden="true"></div>
+          <div style="margin-top:12px">
+            <div class="muted">Lost area (index): <strong id="lostH">0</strong></div>
+            <div class="muted">Percent of baseline lost: <strong id="lostP">0%</strong></div>
+            <div class="muted">Time (ticks): <strong id="simTime">0</strong></div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label style="display:block;margin-bottom:6px">Deforestation intensity (ha per tick):</label>
+            <input id="intensity" type="range" min="50" max="1200" value="400" step="10" oninput="updateIntensityDisplay()">
+            <div class="muted" style="margin-top:6px">Current intensity: <span id="intVal">400</span> ha / tick</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <button class="start-btn" style="padding:8px 12px" onclick="startSim()">Start</button>
+            <button class="start-btn" style="background:#6c8f71;padding:8px 12px;margin-left:8px" onclick="stopSim()">Stop</button>
+            <button class="start-btn" style="background:#8fbf9a;padding:8px 12px;margin-left:8px" onclick="resetSim()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="content" style="display:none">
+      <h2>Quiz — 10 questions</h2>
+      <p>Choose one answer per question. Press Submit to show which are correct and to read a short explanation.</p>
+
+      <form id="quizForm" onsubmit="return false">
+        <!-- questions inserted by JS -->
+      </form>
+      <div style="margin-top:12px">
+        <button class="start-btn" onclick="submitQuiz()">Submit & Show Results</button>
+      </div>
+      <div id="quizSummary" style="margin-top:14px"></div>
+    </section>
+
+    <!-- SOURCES -->
+    <section id="sources" class="content" style="display:none">
+      <h2>Bibliography & Sources</h2>
+      <p>Key sources used in this site (abridged). Click to read more on each site:</p>
+      <div class="sources">
+        <ul>
+          <li><a href="https://www.fao.org/forest-resources-assessment/en/" target="_blank">FAO — Global Forest Resources Assessment (FAO)</a> — global data on forest area and trends.</li>
+          <li><a href="https://www.worldwildlife.org/threats/deforestation" target="_blank">WWF — Deforestation & forest degradation</a> — causes and conservation actions.</li>
+          <li><a href="https://earthobservatory.nasa.gov/features/GlobalDeforestation" target="_blank">NASA Earth Observatory — Deforestation analyses</a> — satellite-based observations and impacts on carbon.</li>
+          <li><a href="https://www.rainforest-alliance.org" target="_blank">Rainforest Alliance</a> — sustainable supply chains and certification info.</li>
+          <li><a href="https://www.ipcc.ch" target="_blank">IPCC — Climate reports</a> — role of land-use and forests in climate change.</li>
+          <li><a href="https://www.worldbank.org" target="_blank">World Bank — forest protection & policy</a></li>
+        </ul>
+      </div>
+      <p class="muted">If you use any of these sources in a school report, cite the specific page and publication year shown on the source site.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2025 MGC Deforestation Project</div>
+    <div style="margin-top:6px">Made by <strong>Arraya</strong> 🌿 | Thanks <strong>Cleon</strong> for the help</div>
+  </footer>
 
   <script>
-    function show(id) {
-      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
+    /* ---------------- Landing -> main transition ---------------- */
+    const startBtn = document.getElementById('startBtn');
+    const landing = document.getElementById('landing');
+    const mainHeader = document.getElementById('mainHeader');
+    const mainContent = document.getElementById('mainContent');
+
+    startBtn.addEventListener('click', () => {
+      landing.style.transition = 'opacity .6s ease, transform .6s ease';
+      landing.style.opacity = '0';
+      landing.style.transform = 'translateY(-18px)';
+      setTimeout(() => {
+        landing.style.display = 'none';
+        mainHeader.style.display = 'flex';
+        mainContent.style.display = 'block';
+        showSection('purpose');
+        window.scrollTo({top:0,behavior:'smooth'});
+      }, 600);
+    });
+
+    /* ---------------- Section show helper ---------------- */
+    function showSection(id){
+      document.querySelectorAll('main section').forEach(s => s.style.display = 'none');
+      const el = document.getElementById(id);
+      if(el) el.style.display = 'block';
+      window.scrollTo({top:0,behavior:'smooth'});
     }
 
-    document.querySelectorAll(".accordion").forEach(acc => {
-      acc.addEventListener("click", () => {
-        acc.classList.toggle("active");
-      });
-    });
+    /* Initialize with Purpose visible if main shown */
+    // showSection('purpose'); // not until start
 
-    const ctx = document.getElementById("forestChart").getContext("2d");
-    const chart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: Array.from({ length: 20 }, (_, i) => i + 1),
-        datasets: [{ label: "Forest Area (million ha)", data: [], borderColor: "#2e7d32", tension: 0.4 }]
-      },
-      options: { scales: { y: { beginAtZero: true } } }
-    });
-
-    function updateSim() {
-      let rate = parseFloat(document.getElementById("rate").value);
-      document.getElementById("rateVal").textContent = rate + "%";
-      let forest = 100, data = [];
-      for (let i = 0; i < 20; i++) {
-        forest -= forest * (rate / 100);
-        data.push(forest.toFixed(2));
+    /* ---------------- Accordion toggle ---------------- */
+    function toggleCard(card){
+      // toggle "expanded" class on clicked card
+      card.classList.toggle('expanded');
+      // ensure the inner detail is focusable when expanded
+      const detail = card.querySelector('.detail');
+      if(detail && card.classList.contains('expanded')){
+        detail.scrollIntoView({behavior:'smooth', block:'center'});
       }
-      chart.data.datasets[0].data = data;
-      chart.update();
     }
-    updateSim();
+    // allow keyboard toggling
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Enter' && document.activeElement && document.activeElement.classList.contains('card')){
+        toggleCard(document.activeElement);
+      }
+    });
 
+    /* -------------- Simulation (Chart.js) -------------- */
+    const ctx = document.getElementById('forestChart').getContext('2d');
+    let simChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: Array.from({length:20}, (_,i) => `Year ${i+1}`),
+        datasets: [{
+          label: 'Forest area index (start = 100)',
+          data: Array(20).fill(100),
+          borderColor: '#2e7d32',
+          backgroundColor: 'rgba(46,125,50,0.06)',
+          tension: 0.35,
+          fill:true,
+        }]
+      },
+      options: {
+        responsive:true,
+        scales: {
+          y: { beginAtZero:false, suggestedMin:0, suggestedMax:110 }
+        }
+      }
+    });
+
+    // Forest visual: initial trees
+    function initForestVisual(){
+      const v = document.getElementById('forestVisual');
+      v.innerHTML = '';
+      const count = 12;
+      for(let i=0;i<count;i++){
+        const t = document.createElement('div');
+        t.className = 'tree';
+        t.style.left = (8 + i*40 + (Math.random()*16-8)) + 'px';
+        v.appendChild(t);
+      }
+    }
+    initForestVisual();
+
+    let simInterval = null;
+    let simSeconds = 0;
+    let lostIndex = 0;
+    function updateIntensityDisplay(){
+      document.getElementById('intVal').innerText = document.getElementById('intensity').value;
+    }
+    updateIntensityDisplay();
+
+    function startSim(){
+      if(simInterval) return;
+      simInterval = setInterval(() => {
+        simSeconds++;
+        const intensity = parseInt(document.getElementById('intensity').value,10); // ha / tick
+        // accelerate effect on index for visibility: convert ha to index points
+        const delta = (intensity / 1000) * (1 + Math.random()*0.6); // more variance
+        lostIndex += delta;
+        // build data: start index 100 reduced by lostIndex
+        const data = [];
+        for(let i=0;i<20;i++){
+          // a simple progressive model: larger losses over time
+          const step = Math.min(100, 100 - Math.pow((lostIndex/20)*(i+1)/5, 0.9));
+          data.push(parseFloat(Math.max(1, step).toFixed(2)));
+        }
+        simChart.data.datasets[0].data = data;
+        simChart.update();
+
+        document.getElementById('lostH').innerText = Math.round(lostIndex);
+        const percent = ((lostIndex/100)*1).toFixed(2);
+        document.getElementById('lostP').innerText = (percent) + '%';
+        document.getElementById('simTime').innerText = simSeconds;
+
+        // remove a tree sometimes for visual effect
+        const trees = document.querySelectorAll('#forestVisual .tree');
+        if(trees.length > 0 && Math.random() < 0.23){
+          trees[trees.length-1].remove();
+        }
+      }, 700);
+    }
+
+    function stopSim(){
+      clearInterval(simInterval);
+      simInterval = null;
+    }
+
+    function resetSim(){
+      stopSim();
+      simSeconds = 0;
+      lostIndex = 0;
+      document.getElementById('lostH').innerText = '0';
+      document.getElementById('lostP').innerText = '0%';
+      document.getElementById('simTime').innerText = '0';
+      simChart.data.datasets[0].data = Array(20).fill(100);
+      simChart.update();
+      initForestVisual();
+    }
+
+    /* ------------- Quiz building & logic ------------- */
     const quizData = [
-      { q: "Main cause of deforestation?", o: ["Agriculture", "Mining", "Tourism", "Fishing"], a: 0 },
-      { q: "Which gas increases after trees are cut?", o: ["CO2", "Oxygen", "Helium", "Nitrogen"], a: 0 },
-      { q: "What is a result of soil erosion?", o: ["Loss of fertility", "More crops", "Thicker soil", "Cleaner water"], a: 0 },
-      { q: "What helps forests recover?", o: ["Reforestation", "Logging", "Burning", "Mining"], a: 0 },
-      { q: "What percent of life lives in forests?", o: ["80%", "40%", "20%", "5%"], a: 0 },
-      { q: "What effect does deforestation have on climate?", o: ["Warming", "Cooling", "No effect", "Extra rain"], a: 0 },
-      { q: "Which of these harms forests?", o: ["Illegal logging", "Tree planting", "Eco-tourism", "Conservation"], a: 0 },
-      { q: "Who protects forests globally?", o: ["WWF", "NBA", "FIFA", "NATO"], a: 0 },
-      { q: "Forests act as what for CO₂?", o: ["Carbon sinks", "Sources", "Balloons", "Filters"], a: 0 },
-      { q: "Deforestation affects?", o: ["Everyone", "Only animals", "Only plants", "No one"], a: 0 },
+      { q: "What is the main cause of large-scale tropical deforestation?", opts:["Mining","Agricultural expansion (cattle, soy, palm oil)","Urban gardening","Solar farms"], a:1,
+        explain: "Agriculture — large-scale cattle ranching and commodity crops (soy, palm oil) are the biggest drivers of tropical forest loss." },
+
+      { q: "What greenhouse gas increases significantly when forests are cut or burned?", opts:["Oxygen","Carbon dioxide (CO₂)","Nitrogen","Argon"], a:1,
+        explain: "When trees burn or decompose, the carbon stored in them is released as CO₂, raising atmospheric greenhouse gases." },
+
+      { q: "Approximately what share of the world’s terrestrial biodiversity lives in forests?", opts:["~10%","~80%","~30%","~50%"], a:1,
+        explain: "Forests — especially tropical forests — host a very large share of land-based species. Estimates commonly cite around 80% for many groups." },
+
+      { q: "Which of these helps reduce deforestation?", opts:["Buying uncertified timber","Supporting certified sustainable products (FSC, RSPO)","Clearing more land","Burning forest residue"], a:1,
+        explain: "Purchasing sustainably certified products encourages producers to avoid clearing natural forests and supports better practices." },
+
+      { q: "How does deforestation affect local water cycles?", opts:["Increases rainfall reliably","Reduces moisture recycling and can cause droughts","Makes rivers cleaner","Stops evaporation"], a:1,
+        explain: "Forest transpiration returns moisture to the atmosphere; removing trees can reduce regional rainfall and increase drought risk." },
+
+      { q: "Why are Indigenous land rights important for forest protection?", opts:["They always cut more forest","Secure rights often lead to better protection","They have no effect","They only matter for cities"], a:1,
+        explain: "Where Indigenous and local communities have recognized rights, deforestation rates are often lower because those communities manage the land sustainably." },
+
+      { q: "Which practice restores soil and provides farmer income without clearing new forests?", opts:["Slash-and-burn every year","Agroforestry (mixing trees with crops)","Monoculture expansion","Overgrazing"], a:1,
+        explain: "Agroforestry combines trees and crops in ways that increase biodiversity, improve soils, and reduce the need to clear new land." },
+
+      { q: "What immediate effect does a large forest fire have on climate?", opts:["It stores more carbon","It releases large amounts of carbon dioxide","It decreases storms instantly","It adds oxygen"], a:1,
+        explain: "Fires release significant carbon stored in vegetation, increasing atmospheric CO₂ and contributing to warming." },
+
+      { q: "Which is a practical personal action to reduce pressure on forests?", opts:["Always buy the cheapest goods","Choose products with sustainability labels and reduce waste","Throw away paper more often","Never recycle"], a:1,
+        explain: "Choosing certified sustainable products, reducing waste and eating lower-impact diets can collectively lower demand for deforestation-linked commodities." },
+
+      { q: "What’s a high-impact policy that helps slow deforestation?", opts:["Stronger land protection & enforcement","Removing all environmental laws","More subsidies for clearing","Ignoring monitoring"], a:0,
+        explain: "Policies that protect forests, enforce rules against illegal clearing, and support alternatives are effective at reducing deforestation." }
     ];
 
-    const container = document.getElementById("quiz-container");
-    let answers = Array(quizData.length).fill(null);
+    // Build quiz elements
+    const quizForm = document.getElementById('quizForm');
+    quizData.forEach((item, idx) => {
+      const block = document.createElement('div');
+      block.className = 'quiz-q';
+      block.id = 'q'+idx;
+      const qTitle = document.createElement('h3');
+      qTitle.innerText = (idx+1) + '. ' + item.q;
+      block.appendChild(qTitle);
 
-    quizData.forEach((q, i) => {
-      let div = document.createElement("div");
-      div.innerHTML = `<h3>${i + 1}. ${q.q}</h3>`;
-      q.o.forEach((opt, j) => {
-        const optDiv = document.createElement("div");
-        optDiv.classList.add("quiz-option");
-        optDiv.textContent = opt;
-        optDiv.onclick = () => answers[i] = j;
-        div.appendChild(optDiv);
+      item.opts.forEach((opt, j) => {
+        const optDiv = document.createElement('div');
+        optDiv.className = 'opt';
+        optDiv.role = 'button';
+        optDiv.tabIndex = 0;
+        optDiv.innerText = opt;
+        optDiv.dataset.q = idx;
+        optDiv.dataset.opt = j;
+        optDiv.addEventListener('click', () => selectOption(idx, j));
+        optDiv.addEventListener('keydown', (e) => { if(e.key === 'Enter') selectOption(idx,j); });
+        block.appendChild(optDiv);
       });
-      container.appendChild(div);
+
+      // explanation container (hidden until submit)
+      const expl = document.createElement('div');
+      expl.className = 'explain';
+      expl.style.display = 'none';
+      expl.id = 'explain-'+idx;
+      block.appendChild(expl);
+
+      quizForm.appendChild(block);
     });
 
-    function submitQuiz() {
-      let correct = 0;
-      document.querySelectorAll(".quiz-option").forEach(o => o.classList.remove("correct", "wrong"));
-      quizData.forEach((q, i) => {
-        const options = container.children[i].querySelectorAll(".quiz-option");
-        options.forEach((opt, j) => {
-          if (j === q.a) opt.classList.add("correct");
-          else if (answers[i] === j) opt.classList.add("wrong");
-        });
-        if (answers[i] === q.a) correct++;
+    // Manage selections
+    const selections = Array(quizData.length).fill(null);
+    function selectOption(qIdx, optIdx){
+      selections[qIdx] = optIdx;
+      // visual selection (pre-submit) - highlight chosen
+      const qBlock = document.getElementById('q'+qIdx);
+      qBlock.querySelectorAll('.opt').forEach(el => {
+        el.style.outline = 'none';
+        el.style.border = '2px solid transparent';
       });
-      document.getElementById("quiz-result").textContent = `You got ${correct}/${quizData.length} correct!`;
+      const chosen = qBlock.querySelector(`.opt[data-opt="${optIdx}"]`);
+      if(chosen) chosen.style.border = '2px solid rgba(27,67,50,0.4)';
     }
+
+    function submitQuiz(){
+      let score = 0;
+      quizData.forEach((item, i) => {
+        const qBlock = document.getElementById('q'+i);
+        const opts = qBlock.querySelectorAll('.opt');
+        opts.forEach((el, j) => {
+          el.classList.remove('correct','wrong');
+          el.style.border = '2px solid transparent';
+          if(j === item.a){
+            el.classList.add('correct');
+          } else if(selections[i] === j){
+            el.classList.add('wrong');
+          }
+        });
+        const expl = document.getElementById('explain-'+i);
+        expl.style.display = 'block';
+        expl.innerHTML = `<strong>Answer:</strong> ${item.opts[item.a]}<br>${item.explain}`;
+        if(selections[i] === item.a) score++;
+      });
+      const summary = document.getElementById('quizSummary');
+      summary.innerHTML = `<strong>Your score: ${score}/${quizData.length}</strong> ${score===quizData.length ? '🌟 Amazing!' : ''}`;
+      summary.scrollIntoView({behavior:'smooth'});
+    }
+
+    /* --------------- initial view -------------- */
+    // show "causes" collapsed? We'll show Purpose on start button press
+    // default: show nothing until start
+
+    /* ----------------- End script --------------- */
   </script>
 </body>
 </html>
